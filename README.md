@@ -266,13 +266,55 @@ Coverage output is written to `coverage/lcov.info`, and OpenClaude also generate
 
 **`src/`** is the CLI/agent code; a build writes **`dist/cli.mjs`**. Everything else is either documentation, stuff that helps you build and ship, the VS Code add-on, or boring repo files (CI, licences, etc.).
 
-Rough split:
+GitHub’s Mermaid preview used to truncate long lines in these boxes, so the diagrams stick to paths and short tokens.
 
-- **Docs:** `docs/`, this `README`, `ANDROID_INSTALL.md`.
-- **Agent:** `src/`, `bin/`, `package.json`, `tsconfig.json`.
-- **Other:** `scripts/`, `vscode-extension/`, `python/`, `.github/`, `.env.example`, plus `CONTRIBUTING`, `CHANGELOG`, `LEGAL`, `LICENSE`, `SECURITY`.
+**Layout**
 
-If you **clone** the repo you get all of that. The **npm** package is whatever is listed under `"files"` in `package.json` (currently `bin/`, `dist/cli.mjs`, and `README.md`).
+```mermaid
+flowchart TB
+  subgraph DOC[Documentation]
+    direction LR
+    D1[docs/]
+    D2[README.md]
+    D3[ANDROID_INSTALL.md]
+  end
+  subgraph AGENT[Terminal agent]
+    direction LR
+    A1[src/]
+    A2[bin/]
+    A3[package.json]
+    A4[tsconfig.json]
+  end
+  subgraph OUT[Build output]
+    O1[dist/cli.mjs]
+  end
+  subgraph META[Tooling and meta]
+    direction LR
+    M1[scripts/]
+    M2[vscode-extension/]
+    M3[python/]
+    M4[.github/]
+    M5[.env.example]
+  end
+  AGENT --> OUT
+```
+
+**Clone vs npm**
+
+```mermaid
+flowchart LR
+  subgraph CLONE[Git clone]
+    C1[entire repo]
+  end
+  subgraph NPM[npm package]
+    direction TB
+    N1[bin/]
+    N2[dist/cli.mjs]
+    N3[README.md]
+  end
+```
+
+A clone is the whole tree. The published tarball is whatever `"files"` in `package.json` says — at the moment that’s `bin/`, `dist/cli.mjs`, and `README.md`. Policy files (`CONTRIBUTING`, `CHANGELOG`, `LEGAL`, `LICENSE`, `SECURITY`) sit at the repo root; they’re not drawn above to keep the boxes small.
 
 ### Paths
 
