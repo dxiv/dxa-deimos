@@ -2,7 +2,7 @@
 
 ## Dependabot
 
-[`.github/dependabot.yml`](../.github/dependabot.yml) opens weekly PRs for **GitHub Actions** and **Bun** dependencies. If the Bun ecosystem is unavailable on your org’s GitHub plan, switch that block to `package-ecosystem: "npm"` or disable it.
+[`.github/dependabot.yml`](../.github/dependabot.yml) opens **GitHub Actions** and **Bun** dependency PRs on the schedule set there (`daily` or `weekly`). Any push to that file on `main` makes Dependabot re-read the config and usually queue a run within a few hours. If the Bun ecosystem is unavailable on your org’s GitHub plan, switch that block to `package-ecosystem: "npm"` or disable it.
 
 **Bun PRs:** CI uses `bun install --frozen-lockfile`. [`.github/workflows/dependabot-bun-lock.yml`](../.github/workflows/dependabot-bun-lock.yml) runs on Dependabot PRs that touch `package.json` / `bun.lock`, runs `bun install`, and pushes an updated `bun.lock` when needed. The repo needs **Settings → Actions → General → Workflow permissions → Read and write** (or equivalent) so that job can push to the PR branch.
 
