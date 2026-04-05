@@ -264,51 +264,52 @@ Coverage output is written to `coverage/lcov.info`, and OpenClaude also generate
 
 ## Repository structure
 
-Block-style overview (representative — `src/` has many more top-level packages than shown):
+How the repo splits: **documentation and meta** live beside the **TypeScript terminal agent** you build into `dist/cli.mjs`. Only the agent paths ship in the published npm package (see `package.json` `"files"`); docs, extension, and `python/` stay in the repo for people and tooling.
 
 ```text
 ■■■ OpenClaude/
-        ■■■ .github/
-                ■■■ workflows/
-                ■■■ ISSUE_TEMPLATE/
-                ■■■ dependabot.yml
-                ■■■ pull_request_template.md
-        ■■■ bin/
-        ■■■ docs/
-        ■■■ python/
-        ■■■ scripts/
-        ■■■ src/
-                ■■■ assistant/
-                ■■■ bridge/
-                ■■■ cli/
-                ■■■ entrypoints/
-                ■■■ …
+
+  ■■■ ■■■ ■■■  DOCUMENTATION  — for humans only; not bundled into the CLI
+        ■■■ docs/                      quick starts, checklist, troubleshooting, …
+        ■■■ README.md                  project overview (this file)
+        ■■■ ANDROID_INSTALL.md         Android / Termux build notes
+
+  ■■■ ■■■ ■■■  TERMINAL AGENT (core product)  — `bun run build` → dist/cli.mjs
+        ■■■ src/                       CLI, providers, tools, MCP, TUI, sessions, …
+        ■■■ bin/                       openclaude launcher → built CLI
+        ■■■ package.json               npm package @dxiv/openclaude
+        ■■■ tsconfig.json              TypeScript project for src/
+
+  ■■■ ■■■ ■■■  BUILD & CHECKS  — maintain the agent; not shipped to end users
+        ■■■ scripts/                   build.ts, doctor, scans, coverage UI, …
+
+  ■■■ ■■■ ■■■  EDITOR ADD-ON  — separate from the npm CLI bundle
         ■■■ vscode-extension/
-                ■■■ openclaude-vscode/
-                        ■■■ src/
-                        ■■■ themes/
-        ■■■ ANDROID_INSTALL.md
-        ■■■ CHANGELOG.md
+        ■■■     openclaude-vscode/     extension + terminal theme
+
+  ■■■ ■■■ ■■■  OPTIONAL & REPO META
+        ■■■ python/                  small helpers; optional; not required for CLI
+        ■■■ .github/                 PR checks, Dependabot, templates, v* releases
+        ■■■ .env.example             provider env template for local dev
         ■■■ CONTRIBUTING.md
+        ■■■ CHANGELOG.md
         ■■■ LEGAL.md
         ■■■ LICENSE
         ■■■ SECURITY.md
-        ■■■ .env.example
-        ■■■ package.json
-        ■■■ tsconfig.json
-        ■■■ README.md
 ```
 
-| Path | Purpose |
-| --- | --- |
-| `src/` | Core CLI and runtime |
-| `scripts/` | Build, checks, maintenance |
-| `docs/` | User guides ([index](docs/README.md), [checklist](docs/setup-checklist.md), [first run](docs/first-run.md), [troubleshooting](docs/troubleshooting.md)) |
-| `python/` | Optional Python utilities ([readme](python/README.md)) |
-| `vscode-extension/openclaude-vscode/` | VS Code extension |
-| `.env.example` | Provider env template; copy to `.env` for local development |
-| `.github/` | PR checks workflow, `v*` [release artifacts](.github/workflows/release-artifacts.yml), Dependabot, issue/PR templates |
-| `bin/` | `openclaude` launcher (runs `dist/cli.mjs` when built) |
+| Area | Path | Purpose |
+| --- | --- | --- |
+| Documentation | `docs/` | User guides ([index](docs/README.md), [checklist](docs/setup-checklist.md), [first run](docs/first-run.md), [troubleshooting](docs/troubleshooting.md)) |
+| Documentation | `ANDROID_INSTALL.md` | Build inside Termux / proot Ubuntu |
+| Terminal agent | `src/` | Core CLI and runtime (providers, tools, MCP, UI) |
+| Terminal agent | `bin/` | `openclaude` launcher (runs `dist/cli.mjs` when built) |
+| Terminal agent | `package.json` | Package metadata, npm scripts, published `files` list |
+| Build & checks | `scripts/` | Build pipeline, `doctor:*`, security scans, coverage helpers |
+| Editor add-on | `vscode-extension/openclaude-vscode/` | VS Code integration and theme |
+| Optional | `python/` | Optional Python utilities ([readme](python/README.md)) |
+| Repo / CI | `.github/` | [PR checks](.github/workflows/pr-checks.yml), `v*` [release artifacts](.github/workflows/release-artifacts.yml), Dependabot, issue/PR templates |
+| Repo / CI | `.env.example` | Provider env template; copy to `.env` for local development |
 
 ## VS Code Extension
 
