@@ -1,10 +1,10 @@
 # OpenClaude VS Code extension
 
-Companion for the **OpenClaude** CLI: **Control Center** in the activity bar, predictable terminal launches, and links to docs and your workspace profile.
+Companion for the **OpenClaude** CLI: **Control Centre** in the activity bar, predictable terminal launches, and links to docs and your workspace profile.
 
 ## Features
 
-- **Real Control Center status** in the Activity Bar:
+- **Real Control Centre status** in the Activity Bar:
   - whether the configured `openclaude` command is installed
   - the launch command being used
   - whether the launch shim injects `CLAUDE_CODE_USE_OPENAI=1`
@@ -12,7 +12,7 @@ Companion for the **OpenClaude** CLI: **Control Center** in the activity bar, pr
   - the launch cwd that will be used for terminal sessions
   - whether `.openclaude-profile.json` exists in the current workspace root
   - a conservative provider summary inferred from the workspace profile or known environment flags
-- **Project-aware launch behavior**:
+- **Project-aware launch behaviour**:
   - `Launch OpenClaude` launches from the active editor's workspace when possible
   - falls back to the first workspace folder when needed
   - avoids launching from an arbitrary default cwd when a project is open
@@ -34,7 +34,7 @@ After the CLI works, see [First run](https://github.com/dxiv/OpenClaude/blob/mai
 
 ## Commands
 
-- `OpenClaude: Open Control Center`
+- `OpenClaude: Open Control Centre`
 - `OpenClaude: Launch in Terminal`
 - `OpenClaude: Launch in Workspace Root`
 - `OpenClaude: Open Repository`

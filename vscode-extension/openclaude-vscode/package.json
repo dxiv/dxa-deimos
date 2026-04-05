@@ -1,7 +1,7 @@
 {
   "name": "openclaude-vscode",
   "displayName": "OpenClaude",
-  "description": "Practical VS Code companion for OpenClaude with project-aware launch behavior and a real Control Center.",
+  "description": "Practical VS Code companion for OpenClaude with project-aware launch behaviour and a real Control Centre.",
   "version": "0.1.1",
   "publisher": "devnull-bootloader",
   "engines": {
@@ -59,7 +59,7 @@
       },
       {
         "command": "openclaude.openControlCenter",
-        "title": "OpenClaude: Open Control Center",
+        "title": "OpenClaude: Open Control Centre",
         "category": "OpenClaude"
       }
     ],
@@ -76,7 +76,7 @@
       "openclaude": [
         {
           "id": "openclaude.controlCenter",
-          "name": "Control Center",
+          "name": "Control Centre",
           "type": "webview"
         }
       ]
