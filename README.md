@@ -264,9 +264,17 @@ Coverage output is written to `coverage/lcov.info`, and DXA Agent also generates
 
 ## Repository structure
 
-**`src/`** is the CLI/agent code; a build writes **`dist/cli.mjs`**. Everything else is either documentation, stuff that helps you build and ship, the VS Code add-on, or boring repo files (CI, licences, etc.).
+**`src/`** — TypeScript for the CLI (providers, tools, MCP, UI). **`dist/cli.mjs`** is what the build produces; **`bin/dxa-agent`** is what users run and what npm wires up. **`package.json`** and **`tsconfig.json`** go with that stack.
 
-GitHub’s Mermaid preview used to truncate long lines in these boxes, so the diagrams stick to paths and short tokens.
+**`docs/`**, **`README.md`**, **`ANDROID_INSTALL.md`** — onboarding and reference only; nothing there executes as part of the agent.
+
+**`scripts/`** — build entrypoint, `doctor:*`, scans, coverage helpers.
+
+**`vscode-extension/`** — VS Code integration (separate from the npm CLI tarball).
+
+**`python/`** — small optional helpers; skip if you only care about the TypeScript CLI.
+
+**`.github/`** — workflows, Dependabot, issue/PR templates. **`.env.example`** — copy to `.env` when you need provider keys locally.
 
 **Layout**
 
@@ -299,7 +307,9 @@ flowchart TB
   AGENT --> OUT
 ```
 
-**Clone vs npm**
+**Clone vs npm install**
+
+Clone = everything in the chart. `npm install -g @dxiv/dxa-agent` only ships paths listed under `"files"` in `package.json` (currently `bin/`, `dist/cli.mjs`, `README.md`).
 
 ```mermaid
 flowchart LR
@@ -313,8 +323,6 @@ flowchart LR
     N3[README.md]
   end
 ```
-
-A clone is the whole tree. The published tarball is whatever `"files"` in `package.json` says — at the moment that’s `bin/`, `dist/cli.mjs`, and `README.md`. Policy files (`CONTRIBUTING`, `CHANGELOG`, `LEGAL`, `LICENSE`, `SECURITY`) sit at the repo root; they’re not drawn above to keep the boxes small.
 
 ### Paths
 
@@ -347,6 +355,7 @@ A clone is the whole tree. The published tarball is whatever `"files"` in `packa
 
 - **`.github/`** — [PR checks](.github/workflows/pr-checks.yml), `v*` [release artefacts](.github/workflows/release-artifacts.yml), Dependabot, issue/PR templates
 - **`.env.example`** — Provider env template; copy to `.env` for local development
+- **Root** — `CONTRIBUTING.md`, `CHANGELOG.md`, `LEGAL.md`, `LICENSE`, `SECURITY.md`
 
 ## VS Code Extension
 
