@@ -1,9 +1,8 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
-OpenClaude is currently maintained on the latest `main` branch and the latest
-npm release only.
+Security fixes target the latest **`main`** branch and the latest **`@dxiv/openclaude`** npm release.
 
 | Version | Supported |
 | ------- | --------- |

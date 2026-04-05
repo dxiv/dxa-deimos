@@ -1,6 +1,6 @@
-# OpenClaude VS Code Extension
+# OpenClaude VS Code extension
 
-A practical VS Code companion for OpenClaude with a project-aware **Control Center**, predictable terminal launch behavior, and quick access to useful OpenClaude workflows.
+Companion for the **OpenClaude** CLI: **Control Center** in the activity bar, predictable terminal launches, and links to docs and your workspace profile.
 
 ## Features
 

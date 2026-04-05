@@ -1,10 +1,6 @@
-# OpenClaude for Non-Technical Users
+# OpenClaude for non-technical users
 
-This guide is for people who want the easiest setup path.
-
-You do not need to build from source. You do not need Bun. You do not need to understand the full codebase.
-
-If you can copy and paste commands into a terminal, you can set this up.
+Shortest path: **npm install**, set a few **environment variables**, run **`openclaude`**. No source build, no Bun, no need to read the codebase—only a terminal and Node.js 20+.
 
 ## What OpenClaude Does
 

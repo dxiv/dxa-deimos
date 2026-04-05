@@ -1,17 +1,16 @@
 # Contributing to OpenClaude
 
-Thanks for contributing.
+Thanks for contributing. I merge patches that are **small, tested, and easy to review**.
 
-OpenClaude moves quickly: multi-provider CLI, local backends, MCP, terminal-first. I merge patches that are focused, tested, and easy to review.
+## Before you start
 
-## Before You Start
+- Read **[LEGAL.md](LEGAL.md)** once (copyright, third-party deps, trademarks—short).
+- Search [issues](https://github.com/dxiv/OpenClaude/issues) and [discussions](https://github.com/dxiv/OpenClaude/discussions) before opening a new thread.
+- **Issues:** confirmed bugs and concrete feature work. **Discussions:** setup questions, ideas.
+- **Larger changes:** open an issue first so scope is agreed.
+- **Security:** [SECURITY.md](SECURITY.md) (private report, not a public issue).
 
-- Skim [LEGAL.md](LEGAL.md) so you know how this repo handles copyright, third-party code, and trademarks (quick read).
-- Search existing [issues](https://github.com/dxiv/OpenClaude/issues) and [discussions](https://github.com/dxiv/OpenClaude/discussions) before opening a new thread.
-- Use issues for confirmed bugs and actionable feature work.
-- Use discussions for setup help, ideas, and general community conversation.
-- For larger changes, open an issue first so the scope is clear before implementation.
-- For security reports, follow [SECURITY.md](SECURITY.md).
+**Docs map for users:** [README.md](README.md) → `docs/quick-start-*.md`, [docs/advanced-setup.md](docs/advanced-setup.md), [ANDROID_INSTALL.md](ANDROID_INSTALL.md). **Optional Python helpers:** [python/README.md](python/README.md).
 
 ## Local Setup
 

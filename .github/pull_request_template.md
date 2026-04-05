@@ -1,21 +1,21 @@
 ## Summary
 
-- what changed
-- why it changed
+- What changed (1–3 bullets)
+- Why (motivation / bug / feature)
 
 ## Impact
 
-- user-facing impact:
-- developer/maintainer impact:
+- Users:
+- Contributors / maintainers:
 
 ## Testing
 
 - [ ] `bun run build`
 - [ ] `bun run smoke`
-- [ ] focused tests:
+- [ ] Focused tests: `bun test …` (list paths)
 
 ## Notes
 
-- provider/model path tested:
-- screenshots attached (if UI changed):
-- follow-up work or known limitations:
+- Provider + model tested (if relevant):
+- Screenshots (if UI / terminal / VS Code changed):
+- Follow-ups / known limits:

@@ -1,8 +1,8 @@
 # OpenClaude
 
-This is the public source for **OpenClaude**, a terminal-first coding agent I ship under **MIT**. One `openclaude` binary, your choice of backend (OpenAI-style APIs, Gemini, GitHub Models, Ollama, Atomic Chat, …), plus tools, MCP, and slash commands in the usual agent style. VS Code extension and a dark terminal theme are in-repo if you use those.
+**OpenClaude** is a **MIT-licensed** terminal coding agent: one `openclaude` command, your choice of model backend (OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), plus tools, **MCP**, and slash commands. This repo also includes a **VS Code extension** and a dark terminal theme.
 
-**Not affiliated** with Anthropic, PBC, or any other vendor—see [LEGAL.md](LEGAL.md) for trademark / MIT / how to report issues (not legal advice).
+**Legal:** not affiliated with Anthropic, PBC, or any other vendor. Trademarks, MIT terms, and how to raise concerns: **[LEGAL.md](LEGAL.md)** (general information only—not legal advice).
 
 [![PR Checks](https://github.com/dxiv/OpenClaude/actions/workflows/pr-checks.yml/badge.svg?branch=main)](https://github.com/dxiv/OpenClaude/actions/workflows/pr-checks.yml)
 [![Release](https://img.shields.io/github/v/tag/dxiv/OpenClaude?label=release&color=0ea5e9)](https://github.com/dxiv/OpenClaude/tags)
@@ -10,14 +10,14 @@ This is the public source for **OpenClaude**, a terminal-first coding agent I sh
 [![Security Policy](https://img.shields.io/badge/security-policy-0f766e)](SECURITY.md)
 [![License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 
-[Quick Start](#quick-start) | [Setup Guides](#setup-guides) | [Providers](#supported-providers) | [Source Build](#source-build-and-local-development) | [VS Code Extension](#vs-code-extension) | [Community](#community)
+[Quick Start](#quick-start) · [Setup guides](#setup-guides) · [Providers](#supported-providers) · [Source build](#source-build-and-local-development) · [VS Code](#vs-code-extension) · [Community](#community)
 
-## Why I bothered
+## Why use it
 
-- One CLI for both cloud APIs and local inference instead of a different tool per host
-- `/provider` walks you through setup and writes a profile you can reuse
-- Same workflow for bash, file edits, grep/glob, agents, tasks, MCP, and the usual web helpers
-- Optional VS Code bits if you want the editor to start sessions for you
+- One CLI for cloud APIs and local inference
+- `/provider` for guided setup and a saved profile
+- Bash, file tools, grep/glob, agents, tasks, MCP, web helpers
+- Optional VS Code integration from this repo
 
 ## Quick Start
 
@@ -94,7 +94,10 @@ Beginner-friendly guides:
 
 Advanced and source-build guides:
 
-- [Advanced Setup](docs/advanced-setup.md)
+- [Advanced Setup](docs/advanced-setup.md) — Bun, profiles, `doctor:*`, env reference
+- [Android (Termux)](ANDROID_INSTALL.md) — build inside proot Ubuntu when you need a phone/tablet setup
+
+**Optional:** the [`python/`](python/) tree holds small **Python helpers** for provider experiments—not needed for normal CLI install. See [`python/README.md`](python/README.md).
 
 ## Supported Providers
 
@@ -244,14 +247,18 @@ Recommended contributor validation before opening a PR:
 - focused `bun test ...` runs for the files and flows you changed
 
 Coverage output is written to `coverage/lcov.info`, and OpenClaude also generates a git-activity-style heatmap at `coverage/index.html`.
-## Repository Structure
 
-- `src/` - core CLI/runtime
-- `scripts/` - build, verification, and maintenance scripts
-- `docs/` - setup, contributor, and project documentation
-- `vscode-extension/openclaude-vscode/` - VS Code extension
-- `.github/` - repo automation, templates, and CI configuration
-- `bin/` - CLI launcher entrypoints
+## Repository structure
+
+| Path | Purpose |
+| --- | --- |
+| `src/` | Core CLI and runtime |
+| `scripts/` | Build, checks, maintenance |
+| `docs/` | User setup guides |
+| `python/` | Optional Python utilities ([readme](python/README.md)) |
+| `vscode-extension/openclaude-vscode/` | VS Code extension |
+| `.github/` | CI, issue/PR templates |
+| `bin/` | `openclaude` launcher (runs `dist/cli.mjs` when built) |
 
 ## VS Code Extension
 
@@ -268,17 +275,8 @@ If you believe you found a security issue, see [SECURITY.md](SECURITY.md).
 
 ## Contributing
 
-Contributions are welcome.
-
-For larger changes, open an issue first so the scope is clear before implementation. Helpful validation commands include:
-
-- `bun run build`
-- `bun run test:coverage`
-- `bun run smoke`
-- focused `bun test ...` runs for touched areas
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for clone → `bun install` → build, PR expectations, and checks. Larger changes: open an issue first.
 
 ## Legal / trademarks
 
-**Short version:** **MIT** for what’s in this repo; third-party deps under their own licenses; other companies’ names only where **descriptive** (see [LEGAL.md](LEGAL.md)). **License text:** [LICENSE](LICENSE).
-
-(I am not a lawyer—if you need certainty, hire one.)
+**MIT** applies to material in this repository; dependencies have their own licenses. Third-party **names** appear only where **descriptive** (see [LEGAL.md](LEGAL.md)). Full license text: [LICENSE](LICENSE). *Not legal advice—consult counsel if you need a formal opinion.*
