@@ -28,7 +28,9 @@ Companion for the **OpenClaude** CLI: **Control Center** in the activity bar, pr
 ## Requirements
 
 - VS Code `1.95+`
-- `openclaude` available in your terminal PATH (`npm install -g @dxiv/openclaude`)
+- `openclaude` on the **same PATH** the integrated terminal uses (`npm install -g @dxiv/openclaude`). If the command is missing, see [Setup checklist](https://github.com/dxiv/OpenClaude/blob/main/docs/setup-checklist.md) and [Troubleshooting](https://github.com/dxiv/OpenClaude/blob/main/docs/troubleshooting.md).
+
+After the CLI works, see [First run](https://github.com/dxiv/OpenClaude/blob/main/docs/first-run.md) for `/help` and `/provider`.
 
 ## Commands
 

@@ -26,7 +26,7 @@ if (existsSync(distPath)) {
   Or run directly with Bun:
     bun run dev
 
-  See README.md for setup instructions.
+  See README.md and docs/setup-checklist.md for setup instructions.
 `)
   process.exit(1)
 }

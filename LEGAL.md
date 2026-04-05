@@ -52,5 +52,7 @@ We do **not** intend **false endorsement**, **trademark confusion**, or **bad-fa
 | Maintainer-facing contribution norms | [CONTRIBUTING.md](CONTRIBUTING.md) |
 | Security reports | [SECURITY.md](SECURITY.md) |
 | Plain-language project intro | [README.md](README.md) |
+| Maintainer release / labels notes | [docs/maintainers.md](docs/maintainers.md) |
+| End-user onboarding | [docs/first-run.md](docs/first-run.md), [docs/setup-checklist.md](docs/setup-checklist.md) |
 
 — dxiv / OpenClaude contributors

@@ -1,112 +1,112 @@
-# OpenClaude for non-technical users
+# OpenClaude setup for new users
 
-Shortest path: **npm install**, set a few **environment variables**, run **`openclaude`**. No source build, no Bun, no need to read the codebase—only a terminal and Node.js 20+.
+This page is for you if you want OpenClaude running **without** cloning the repo or touching the source code. You will use **Node.js** (to run the installer), a **terminal** (a text window where you type commands), and an account or app from an **AI provider** (OpenAI, Ollama, etc.).
 
-## What OpenClaude Does
+**Already comfortable with terminals and npm?** Skip to [Windows](quick-start-windows.md) or [macOS / Linux](quick-start-mac-linux.md), or go straight to [Advanced setup](advanced-setup.md) for building from source.
 
-OpenClaude lets you use an AI coding assistant with different model providers such as:
+---
 
-- OpenAI
-- DeepSeek
-- Gemini
-- Ollama
-- Codex
+## 1. What you need before you start
 
-For most first-time users, OpenAI is the easiest option.
+| You need | What it is |
+| --- | --- |
+| **A computer** | Windows 10/11, macOS, or a common Linux distribution |
+| **Node.js 20+** | Free runtime from [nodejs.org](https://nodejs.org/) — download the **LTS** installer and use the defaults |
+| **A terminal** | A program that runs text commands (see below) |
+| **An AI backend** | Either a **cloud API key** (e.g. OpenAI) **or** a **local** app like [Ollama](https://ollama.com/) so the assistant has a model to talk to |
 
-## Before You Start
+You do **not** need Bun, Git, or this repository’s source code for the path described here.
 
-You need:
+---
 
-1. Node.js 20 or newer installed
-2. A terminal window
-3. An API key from your provider, unless you are using a local model like Ollama
+## 2. How to open a terminal
 
-## Fastest Path
+- **Windows:** Press `Win`, type **PowerShell**, open **Windows PowerShell**. (This guide’s Windows steps assume PowerShell.)
+- **macOS:** Open **Terminal** (Spotlight: `Cmd + Space`, type “Terminal”) or use iTerm if you already have it.
+- **Linux:** Open “Terminal” from your applications menu (names vary by distro).
 
-1. Install OpenClaude with npm
-2. Set 3 environment variables
-3. Run `openclaude`
+---
 
-## Choose Your Operating System
+## 3. Check that Node.js works
 
-- Windows: [Windows Quick Start](quick-start-windows.md)
-- macOS / Linux: [macOS / Linux Quick Start](quick-start-mac-linux.md)
+In the terminal, type exactly:
 
-## Which Provider Should You Choose?
+```text
+node --version
+```
 
-### OpenAI
+Press **Enter**. You should see a version like `v20.x.x` or higher.
 
-Choose this if:
+Then:
 
-- you want the easiest setup
-- you already have an OpenAI API key
+```text
+npm --version
+```
 
-### Ollama
+You should see a version number. If either command fails, reinstall Node from [nodejs.org](https://nodejs.org/) and open a **new** terminal.
 
-Choose this if:
+---
 
-- you want to run models locally
-- you do not want to depend on a cloud API for testing
+## 4. Install OpenClaude (one command)
 
-### Codex
+In the same terminal:
 
-Choose this if:
+```text
+npm install -g @dxiv/openclaude
+```
 
-- you already use the Codex CLI
-- you already have Codex or ChatGPT auth configured
+Wait until it finishes. This downloads the OpenClaude command-line tool onto your machine.
 
-## What Success Looks Like
+**If you see permission errors:** on Mac/Linux you may need `sudo npm install -g @dxiv/openclaude` (you will be prompted for your password). On Windows, run PowerShell **as Administrator** once, or fix npm’s global folder using [npm’s permission docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
-After you run `openclaude`, the CLI should start and wait for your prompt.
+---
 
-At that point, you can ask it to:
+## 5. Tell OpenClaude which AI to use (three “settings”)
 
-- explain code
-- edit files
-- run commands
-- review changes
+OpenClaude needs three pieces of information for the common **OpenAI-compatible** path. You set them as **environment variables** — think of them as temporary settings for that terminal window.
 
-## Common Problems
+| Setting | Plain English |
+| --- | --- |
+| `CLAUDE_CODE_USE_OPENAI=1` | “Use the OpenAI-style connection path” (this is how OpenClaude talks to many providers, not only OpenAI). |
+| `OPENAI_API_KEY` | Your **secret key** from the provider (or leave unset for some local setups). |
+| `OPENAI_MODEL` | Which model name to request (for example `gpt-4o` or an Ollama model name). |
 
-### `openclaude` command not found
+**Important:** In the guides below, settings you type with `export` (Mac/Linux) or `$env:...=` (Windows) usually last **only until you close that terminal**. That is normal. The OS quick starts include an optional **“keep these for every session”** section if you want them saved.
 
-Cause:
+---
 
-- npm installed the package, but your terminal has not refreshed yet
+## 6. Copy the right commands for your system
 
-Fix:
+Do **not** mix Windows and Mac instructions in the same window.
 
-1. Close the terminal
-2. Open a new terminal
-3. Run `openclaude` again
+- **Windows (PowerShell):** [OpenClaude quick start — Windows](quick-start-windows.md)  
+- **macOS or Linux:** [OpenClaude quick start — macOS / Linux](quick-start-mac-linux.md)
 
-### Invalid API key
+Each guide has **one provider at a time** (OpenAI, DeepSeek, Ollama, or LM Studio). Pick **one** block, paste the commands, then run:
 
-Cause:
+```text
+openclaude
+```
 
-- the key is wrong, expired, or copied incorrectly
+---
 
-Fix:
+## 7. First success
 
-1. Get a fresh key from your provider
-2. Paste it again carefully
-3. Re-run `openclaude`
+When it works, OpenClaude opens in the terminal. Next:
 
-### Ollama not working
+1. Use the **[setup checklist](setup-checklist.md)** to confirm each prerequisite.
+2. Read **[Your first minutes in OpenClaude](first-run.md)** — try **`/help`**, then **`/provider`**, then a short question in plain English.
 
-Cause:
+---
 
-- Ollama is not installed or not running
+## 8. If something goes wrong
 
-Fix:
+1. **[Troubleshooting](troubleshooting.md)** — “command not found”, PATH, ripgrep, API errors, Ollama.
+2. **[GitHub Discussions](https://github.com/dxiv/OpenClaude/discussions)** — search your error text.
+3. **Developers** cloning the repo: [Advanced setup](advanced-setup.md) and the root [README](../README.md).
 
-1. Install Ollama from `https://ollama.com/download`
-2. Start Ollama
-3. Try again
+---
 
-## Want More Control?
+## 9. Legal note (short)
 
-If you want source builds, advanced provider profiles, diagnostics, or Bun-based workflows, use:
-
-- [Advanced Setup](advanced-setup.md)
+OpenClaude is an independent open source project. Third-party names (OpenAI, Ollama, etc.) refer to those products so you know which service to sign up for — not an endorsement. Details: [LEGAL.md](../LEGAL.md).

@@ -1,31 +1,64 @@
-# OpenClaude Quick Start for macOS and Linux
+# OpenClaude quick start — macOS and Linux
 
-This guide uses a standard shell such as Terminal, iTerm, bash, or zsh.
+**Audience:** macOS or Linux users using **bash** or **zsh** in Terminal (or iTerm, etc.).
 
-## 1. Install Node.js
+**You will:** install Node (if needed), install OpenClaude with npm, `export` three environment variables for your AI provider, then run `openclaude`.
 
-Install Node.js 20 or newer from:
+**Other paths:** [Non-technical walkthrough](non-technical-setup.md) · [Windows](quick-start-windows.md) · [Advanced / source build](advanced-setup.md) · [Troubleshooting](troubleshooting.md)
 
-- `https://nodejs.org/`
+---
 
-Then check it:
+## Prerequisites
 
-```bash
-node --version
-npm --version
-```
+1. **Node.js 20+** — [https://nodejs.org/](https://nodejs.org/) (LTS) or your distro’s package manager. Check:
 
-## 2. Install OpenClaude
+   ```bash
+   node --version
+   npm --version
+   ```
+
+2. **Ripgrep (`rg`)** — Required for search features.
+
+   - **macOS (Homebrew):** `brew install ripgrep`
+   - **Debian/Ubuntu:** `sudo apt install ripgrep`
+   - **Fedora:** `sudo dnf install ripgrep`
+   - **Arch:** `sudo pacman -S ripgrep`
+
+   Then run `rg --version`. If OpenClaude still complains, open a **new** terminal.
+
+---
+
+## Install OpenClaude
 
 ```bash
 npm install -g @dxiv/openclaude
 ```
 
-## 3. Pick One Provider
+If you see `EACCES` / permission errors, either:
 
-### Option A: OpenAI
+- use a Node version manager ([nvm](https://github.com/nvm-sh/nvm), [fnm](https://github.com/Schniz/fnm), etc.), **or**
+- run with `sudo npm install -g @dxiv/openclaude` (less ideal but common on first setup).
 
-Replace `sk-your-key-here` with your real key.
+If `openclaude` is not found, close the terminal, open a new one, and try again. Check `npm bin -g` is on your `PATH` (`echo $PATH`).
+
+---
+
+## Environment variables (how this works)
+
+These configure the **OpenAI-compatible** path (OpenAI, DeepSeek, Ollama, LM Studio, OpenRouter, …):
+
+| Variable | Purpose |
+| --- | --- |
+| `CLAUDE_CODE_USE_OPENAI` | Set to `1` to enable this mode. |
+| `OPENAI_API_KEY` | API secret from the provider (skip for many local setups). |
+| `OPENAI_MODEL` | Model id string your host expects. |
+| `OPENAI_BASE_URL` | Only if not using `https://api.openai.com/v1`. |
+
+`export` lasts **for this shell session only** unless you add lines to your shell config (below).
+
+---
+
+## Option A — OpenAI (cloud)
 
 ```bash
 export CLAUDE_CODE_USE_OPENAI=1
@@ -35,7 +68,9 @@ export OPENAI_MODEL=gpt-4o
 openclaude
 ```
 
-### Option B: DeepSeek
+---
+
+## Option B — DeepSeek (cloud)
 
 ```bash
 export CLAUDE_CODE_USE_OPENAI=1
@@ -46,98 +81,85 @@ export OPENAI_MODEL=deepseek-chat
 openclaude
 ```
 
-### Option C: Ollama
+---
 
-Install Ollama first from:
+## Option C — Ollama (local)
 
-- `https://ollama.com/download`
+1. Install Ollama: [https://ollama.com/download](https://ollama.com/download)  
+2. Pull a model:
 
-Then run:
+   ```bash
+   ollama pull llama3.2:3b
+   ```
 
-```bash
-ollama pull llama3.1:8b
+3. Run:
 
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_BASE_URL=http://localhost:11434/v1
-export OPENAI_MODEL=llama3.1:8b
+   ```bash
+   export CLAUDE_CODE_USE_OPENAI=1
+   export OPENAI_BASE_URL=http://localhost:11434/v1
+   export OPENAI_MODEL=llama3.2:3b
 
-openclaude
-```
+   openclaude
+   ```
 
-No API key is needed for Ollama local models.
+Match `OPENAI_MODEL` to a name from `ollama list`.
 
-### Option D: LM Studio
+---
 
-Install LM Studio first from:
+## Option D — LM Studio (local)
 
-- `https://lmstudio.ai/`
-
-Then in LM Studio:
-
-1. Download a model (e.g., Llama 3.1 8B, Mistral 7B)
-2. Go to the "Developer" tab
-3. Select your model and enable the server via the toggle
-
-Then run:
+1. Install [LM Studio](https://lmstudio.ai/), load a model, enable the **local server** (Developer tab).  
+2. Set model id and URL to match LM Studio (port **1234** is typical).
 
 ```bash
 export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_BASE_URL=http://localhost:1234/v1
-export OPENAI_MODEL=your-model-name
-# export OPENAI_API_KEY=lmstudio  # optional: some users need a dummy key
+export OPENAI_MODEL=your-model-name-from-lm-studio
 
 openclaude
 ```
 
-Replace `your-model-name` with the model name shown in LM Studio.
-
-No API key is needed for LM Studio local models (but uncomment the `OPENAI_API_KEY` line if you hit auth errors).
-
-## 4. If `openclaude` Is Not Found
-
-Close the terminal, open a new one, and try again:
+If the server returns auth errors:
 
 ```bash
-openclaude
+export OPENAI_API_KEY=lmstudio
 ```
 
-## 5. If Your Provider Fails
+---
 
-Check the basics:
+## Keep settings in every new terminal (optional)
 
-### For OpenAI or DeepSeek
+**zsh (default on recent macOS):** append to `~/.zshrc`:
 
-- make sure the key is real
-- make sure you copied it fully
+```bash
+export CLAUDE_CODE_USE_OPENAI=1
+export OPENAI_API_KEY="sk-your-key-here"
+export OPENAI_MODEL="gpt-4o"
+# export OPENAI_BASE_URL="https://api.deepseek.com/v1"
+```
 
-### For Ollama
+Then run `source ~/.zshrc` or open a new tab.
 
-- make sure Ollama is installed
-- make sure Ollama is running
-- make sure the model was pulled successfully
+**bash:** use `~/.bashrc` or `~/.bash_profile` the same way (depends on distro).
 
-### For LM Studio
+**Security:** files in your home directory can contain secrets — `chmod 600 ~/.zshrc` is a good habit; never commit these files to git.
 
-- make sure LM Studio is installed
-- make sure LM Studio is running
-- make sure the server is enabled (toggle on in the "Developer" tab)
-- make sure a model is loaded in LM Studio
-- make sure the model name matches what you set in `OPENAI_MODEL`
+---
 
-## 6. Updating OpenClaude
+## Update or remove
 
 ```bash
 npm install -g @dxiv/openclaude@latest
 ```
 
-## 7. Uninstalling OpenClaude
-
 ```bash
 npm uninstall -g @dxiv/openclaude
 ```
 
-## Need Advanced Setup?
+---
 
-Use:
+## Next steps
 
-- [Advanced Setup](advanced-setup.md)
+- **[Setup checklist](setup-checklist.md)** — verify prerequisites and env vars.
+- **[First run inside OpenClaude](first-run.md)** — `/help`, `/provider`, exiting safely.
+- Full env table and Bun workflows: [Advanced setup](advanced-setup.md) · Issues: [Troubleshooting](troubleshooting.md)

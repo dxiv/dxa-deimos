@@ -1,31 +1,56 @@
-# OpenClaude Quick Start for Windows
+# OpenClaude quick start — Windows
 
-This guide uses Windows PowerShell.
+**Audience:** Anyone on **Windows 10/11** using **PowerShell** (not CMD unless you know how to translate commands).
 
-## 1. Install Node.js
+**You will:** install Node (if needed), install OpenClaude with npm, set three environment variables for your chosen AI provider, then run `openclaude`.
 
-Install Node.js 20 or newer from:
+**Other paths:** [Non-technical walkthrough](non-technical-setup.md) · [macOS / Linux](quick-start-mac-linux.md) · [Advanced / source build](advanced-setup.md) · [Troubleshooting](troubleshooting.md)
 
-- `https://nodejs.org/`
+---
 
-Then open PowerShell and check it:
+## Prerequisites
 
-```powershell
-node --version
-npm --version
-```
+1. **Node.js 20+** — [https://nodejs.org/](https://nodejs.org/) (LTS). Then in PowerShell:
 
-## 2. Install OpenClaude
+   ```powershell
+   node --version
+   npm --version
+   ```
+
+2. **Ripgrep (`rg`)** — OpenClaude uses it for search. If the first run says `ripgrep not found`, install [Ripgrep for Windows](https://github.com/BurntSushi/ripgrep/releases) or `winget install BurntSushi.ripgrep.MSVC`, then open a **new** PowerShell and check `rg --version`.
+
+3. **Git for Windows** (recommended) — gives you `bash.exe` for some agent features. If OpenClaude complains about bash, install [Git for Windows](https://git-scm.com/download/win) and see [Troubleshooting — Windows Git Bash](troubleshooting.md).
+
+---
+
+## Install OpenClaude
 
 ```powershell
 npm install -g @dxiv/openclaude
 ```
 
-## 3. Pick One Provider
+If `openclaude` is not found afterward, **close PowerShell completely**, open a new window, and try `openclaude` again. If it still fails, see [Troubleshooting](troubleshooting.md).
 
-### Option A: OpenAI
+---
 
-Replace `sk-your-key-here` with your real key.
+## Environment variables (how this works)
+
+These three variables configure the **OpenAI-compatible** code path (used for OpenAI, DeepSeek, Ollama’s API, LM Studio, and many others):
+
+| Variable | Purpose |
+| --- | --- |
+| `CLAUDE_CODE_USE_OPENAI` | Set to `1` to enable this provider mode. |
+| `OPENAI_API_KEY` | Secret key from your cloud provider (often omitted for local Ollama / LM Studio). |
+| `OPENAI_MODEL` | Model id (e.g. `gpt-4o`, `deepseek-chat`, or your Ollama model name). |
+| `OPENAI_BASE_URL` | Only if not using default OpenAI — set to your provider’s API base URL. |
+
+The blocks below set them **for the current PowerShell window only**.
+
+---
+
+## Option A — OpenAI (cloud)
+
+Replace `sk-your-key-here` with your key from [OpenAI API keys](https://platform.openai.com/api-keys).
 
 ```powershell
 $env:CLAUDE_CODE_USE_OPENAI="1"
@@ -35,7 +60,9 @@ $env:OPENAI_MODEL="gpt-4o"
 openclaude
 ```
 
-### Option B: DeepSeek
+---
+
+## Option B — DeepSeek (cloud)
 
 ```powershell
 $env:CLAUDE_CODE_USE_OPENAI="1"
@@ -46,98 +73,82 @@ $env:OPENAI_MODEL="deepseek-chat"
 openclaude
 ```
 
-### Option C: Ollama
+---
 
-Install Ollama first from:
+## Option C — Ollama (local, no cloud key)
 
-- `https://ollama.com/download/windows`
+1. Install Ollama: [https://ollama.com/download/windows](https://ollama.com/download/windows)  
+2. Start Ollama (tray app) and pull a model:
 
-Then run:
+   ```powershell
+   ollama pull llama3.2:3b
+   ```
 
-```powershell
-ollama pull llama3.1:8b
+3. Run:
 
-$env:CLAUDE_CODE_USE_OPENAI="1"
-$env:OPENAI_BASE_URL="http://localhost:11434/v1"
-$env:OPENAI_MODEL="llama3.1:8b"
+   ```powershell
+   $env:CLAUDE_CODE_USE_OPENAI="1"
+   $env:OPENAI_BASE_URL="http://localhost:11434/v1"
+   $env:OPENAI_MODEL="llama3.2:3b"
 
-openclaude
-```
+   openclaude
+   ```
 
-No API key is needed for Ollama local models.
+Use the same model name you pulled (`ollama list` to see names).
 
-### Option D: LM Studio
+---
 
-Install LM Studio first from:
+## Option D — LM Studio (local)
 
-- `https://lmstudio.ai/`
-
-Then in LM Studio:
-
-1. Download a model (e.g., Llama 3.1 8B, Mistral 7B)
-2. Go to the "Developer" tab
-3. Select your model and enable the server via the toggle
-
-Then run:
+1. Install [LM Studio](https://lmstudio.ai/), download a model, open the **Developer** tab, start the local server (default often port **1234**).  
+2. Use the **exact** model identifier LM Studio shows for the API.
 
 ```powershell
 $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_BASE_URL="http://localhost:1234/v1"
-$env:OPENAI_MODEL="your-model-name"
-# $env:OPENAI_API_KEY="lmstudio"  # optional: some users need a dummy key
+$env:OPENAI_MODEL="your-model-name-from-lm-studio"
 
 openclaude
 ```
 
-Replace `your-model-name` with the model name shown in LM Studio.
-
-No API key is needed for LM Studio local models (but uncomment the `OPENAI_API_KEY` line if you hit auth errors).
-
-## 4. If `openclaude` Is Not Found
-
-Close PowerShell, open a new one, and try again:
+If you get auth errors, try a dummy key:
 
 ```powershell
-openclaude
+$env:OPENAI_API_KEY="lmstudio"
 ```
 
-## 5. If Your Provider Fails
+---
 
-Check the basics:
+## Keep settings for every new PowerShell (optional)
 
-### For OpenAI or DeepSeek
+Session variables disappear when you close the window. To set **user-level** variables (persist across sessions):
 
-- make sure the key is real
-- make sure you copied it fully
+```powershell
+[System.Environment]::SetEnvironmentVariable("CLAUDE_CODE_USE_OPENAI", "1", "User")
+[System.Environment]::SetEnvironmentVariable("OPENAI_API_KEY", "sk-your-key-here", "User")
+[System.Environment]::SetEnvironmentVariable("OPENAI_MODEL", "gpt-4o", "User")
+# Optional for non-OpenAI endpoints:
+# [System.Environment]::SetEnvironmentVariable("OPENAI_BASE_URL", "https://api.deepseek.com/v1", "User")
+```
 
-### For Ollama
+Open a **new** PowerShell after this. **Warning:** your API key is stored in Windows user environment variables — anyone with access to your user account could read them. Prefer session-only vars on shared PCs.
 
-- make sure Ollama is installed
-- make sure Ollama is running
-- make sure the model was pulled successfully
+---
 
-### For LM Studio
-
-- make sure LM Studio is installed
-- make sure LM Studio is running
-- make sure the server is enabled (toggle on in the "Developer" tab)
-- make sure a model is loaded in LM Studio
-- make sure the model name matches what you set in `OPENAI_MODEL`
-
-## 6. Updating OpenClaude
+## Update or remove
 
 ```powershell
 npm install -g @dxiv/openclaude@latest
 ```
 
-## 7. Uninstalling OpenClaude
-
 ```powershell
 npm uninstall -g @dxiv/openclaude
 ```
 
-## Need Advanced Setup?
+---
 
-Use:
+## Next steps
 
-- [Advanced Setup](advanced-setup.md)
+- **[Setup checklist](setup-checklist.md)** — verify each step if anything fails.
+- **[First run inside OpenClaude](first-run.md)** — `/help`, `/provider`, permissions, exiting.
+- More providers: [Advanced setup](advanced-setup.md) · Problems: [Troubleshooting](troubleshooting.md)

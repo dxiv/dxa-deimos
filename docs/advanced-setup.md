@@ -1,8 +1,12 @@
 # OpenClaude advanced setup
 
-For **source builds**, **Bun** workflows, **provider profiles**, **diagnostics**, and tighter control over runtime behavior. If you only need npm install + env vars, use the [README](../README.md) quick start or [Windows](quick-start-windows.md) / [macOS / Linux](quick-start-mac-linux.md) guides.
+**Who this is for:** Developers and power users who want to **clone this repo**, use **Bun**, run **`bun run build`**, use **profile launchers** (`profile:init`, `dev:profile`), **`doctor:*` diagnostics**, or copy-paste **many provider examples**.
 
-## Install Options
+**If you only want the published CLI:** follow [Non-technical setup](non-technical-setup.md) or the OS guides — [Windows](quick-start-windows.md) · [macOS / Linux](quick-start-mac-linux.md). **When something breaks:** [Troubleshooting](troubleshooting.md). **After the REPL starts:** [First run](first-run.md).
+
+---
+
+## Install options
 
 ### Option A: npm
 
