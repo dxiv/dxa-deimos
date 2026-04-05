@@ -1,6 +1,6 @@
 # OpenClaude
 
-**OpenClaude** is a **MIT-licensed** terminal coding agent: one `openclaude` command, your choice of model backend (Anthropic Claude, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), plus tools, **MCP**, and slash commands. This repo also includes a **VS Code extension** and a dark terminal theme.
+**OpenClaude** is an MIT-licensed terminal coding agent: one `openclaude` command, pluggable model backends (Anthropic Claude, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), tools, MCP, and slash commands. This repo ships the CLI plus a **VS Code extension** and a dark terminal theme.
 
 **Legal:** not affiliated with Anthropic, PBC, or any other vendor. Trademarks, MIT terms, and how to raise concerns: **[LEGAL.md](LEGAL.md)** (general information only—not legal advice).
 
@@ -10,7 +10,7 @@
 [![Security Policy](https://img.shields.io/badge/security-policy-0f766e)](SECURITY.md)
 [![License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 
-[Quick start](#quick-start) · [Setup guides](#setup-guides) · [Providers](#supported-providers) · [Source build](#source-build-and-local-development) · [VS Code](#vs-code-extension) · [Community](#community)
+[Quick start](#quick-start) · [Setup](#setup-guides) · [Providers](#supported-providers) · [Source build](#source-build-and-local-development) · [Repo layout](#repository-structure) · [VS Code](#vs-code-extension) · [Contributing](#contributing) · [Security](#security) · [Community](#community)
 
 **New to terminals or npm?** **[docs/non-technical-setup.md](docs/non-technical-setup.md)** → [Windows](docs/quick-start-windows.md) or [macOS / Linux](docs/quick-start-mac-linux.md) → **[checklist](docs/setup-checklist.md)** → **[first run](docs/first-run.md)**.
 **All docs:** [docs/README.md](docs/README.md).
@@ -24,7 +24,7 @@
 
 ## Quick start
 
-These commands assume you already know how to use a terminal. Otherwise start with **[docs/non-technical-setup.md](docs/non-technical-setup.md)**.
+You need **Node.js 20+** and a terminal. If that’s new territory, use **[docs/non-technical-setup.md](docs/non-technical-setup.md)** first.
 
 ### Install
 
@@ -32,7 +32,7 @@ These commands assume you already know how to use a terminal. Otherwise start wi
 npm install -g @dxiv/openclaude
 ```
 
-Install **[ripgrep](https://github.com/BurntSushi/ripgrep)** (`rg` on your `PATH`). If OpenClaude says `ripgrep not found`, fix that and open a **new** terminal — see [Troubleshooting](docs/troubleshooting.md).
+Install **[ripgrep](https://github.com/BurntSushi/ripgrep)** and ensure `rg` is on your `PATH`. If the CLI prints `ripgrep not found`, fix `PATH`, then open a **new** terminal window — [Troubleshooting](docs/troubleshooting.md) has more detail.
 
 ### Start
 
@@ -107,7 +107,7 @@ Advanced / source build:
 
 **Optional:** [`python/`](python/) — small Python helpers for experiments; not required for normal CLI install ([`python/README.md`](python/README.md)).
 
-## Supported Providers
+## Supported providers
 
 | Provider | Setup Path | Notes |
 | --- | --- | --- |
@@ -120,7 +120,7 @@ Advanced / source build:
 | Atomic Chat | advanced setup | Local Apple Silicon backend |
 | Bedrock / Vertex / Foundry | env vars | Additional provider integrations for supported environments |
 
-## What Works
+## What works
 
 - **Tool-driven coding workflows**: Bash, file read/write/edit, grep, glob, agents, tasks, MCP, and slash commands
 - **Streaming responses**: Real-time token output and tool progress
@@ -129,7 +129,7 @@ Advanced / source build:
 - **Provider profiles**: Guided setup plus saved `.openclaude-profile.json` support
 - **Local and remote model backends**: Cloud APIs, local servers, and Apple Silicon local inference
 
-## Provider Notes
+## Provider notes
 
 OpenClaude supports multiple providers, but behaviour is not identical across all of them.
 
@@ -140,7 +140,7 @@ OpenClaude supports multiple providers, but behaviour is not identical across al
 
 For best results, use models with strong tool/function calling support.
 
-## Agent Routing
+## Agent routing
 
 OpenClaude can route different agents to different models through settings-based routing. This is useful for cost optimisation or splitting work by model strength.
 
@@ -170,13 +170,13 @@ Add to `~/.claude/settings.json`:
 
 When no routing match is found, the global provider remains the fallback.
 
-> **Note:** `api_key` values in `settings.json` are stored in plaintext. Keep this file private and do not commit it to version control.
+`api_key` values in `settings.json` are plaintext. Don’t commit that file.
 
-## Web Search and Fetch
+## Web search and fetch
 
 By default, `WebSearch` works on non-Anthropic models using DuckDuckGo. This gives GPT-4o, DeepSeek, Gemini, Ollama, and other OpenAI-compatible providers a free web search path out of the box.
 
-> **Note:** DuckDuckGo fallback works by scraping search results and may be rate-limited, blocked, or subject to DuckDuckGo's Terms of Service. If you want a more reliable supported option, configure Firecrawl.
+DuckDuckGo fallback scrapes search results; it can be rate-limited or blocked. For something sturdier, wire up Firecrawl below.
 
 For Anthropic-native backends and Codex responses, OpenClaude keeps the native provider web search behaviour.
 
@@ -195,7 +195,7 @@ With Firecrawl enabled:
 
 Free tier at [firecrawl.dev](https://firecrawl.dev) includes 500 credits. The key is optional.
 
-## Source Build And Local Development
+## Source build and local development
 
 ```bash
 bun install
@@ -203,9 +203,9 @@ bun run build
 node dist/cli.mjs
 ```
 
-For API keys when running from a clone, copy **[.env.example](.env.example)** to `.env`, uncomment a single provider section, and replace placeholders (see the comments at the top of that file).
+From a clone: copy **[.env.example](.env.example)** to `.env`, uncomment one provider block, fill in real values (the file header walks through it).
 
-Helpful commands:
+**Bun** is what the repo scripts expect. Common commands:
 
 - `bun run typecheck`
 - `bun run dev`
@@ -219,62 +219,39 @@ Helpful commands:
 
 **Tags:** pushing a `v*` tag runs [release artefacts](.github/workflows/release-artifacts.yml) (uploads `dist/cli.mjs` as a CI artefact). Maintainer checklist: [docs/maintainers.md](docs/maintainers.md).
 
-## Testing And Coverage
+## Testing and coverage
 
-OpenClaude uses Bun's built-in test runner for unit tests.
-
-Run the full unit suite:
+Tests use **Bun**’s built-in runner.
 
 ```bash
 bun test
 ```
 
-Generate unit test coverage:
+Coverage (writes `coverage/lcov.info` and a heatmap at `coverage/index.html`):
 
 ```bash
 bun run test:coverage
 ```
 
-Open the visual coverage report:
+Open the HTML report: macOS / Linux `open coverage/index.html` — Windows PowerShell: `start coverage/index.html`.
 
-```bash
-open coverage/index.html
-```
-
-If you already have `coverage/lcov.info` and only want to rebuild the UI:
+Rebuild only the coverage UI from an existing `lcov.info`:
 
 ```bash
 bun run test:coverage:ui
 ```
 
-Use focused test runs when you only touch one area:
+Targeted runs:
 
 - `bun run test:provider`
 - `bun run test:provider-recommendation`
 - `bun test path/to/file.test.ts`
 
-Recommended contributor validation before opening a PR:
-
-- `bun run build`
-- `bun run smoke`
-- `bun run test:coverage` for broader unit coverage when your change affects shared runtime or provider logic
-- focused `bun test ...` runs for the files and flows you changed
-
-Coverage output is written to `coverage/lcov.info`, and OpenClaude also generates a git-activity-style heatmap at `coverage/index.html`.
+Before opening a PR, a sensible smoke pass is `bun run build`, `bun run smoke`, then either focused `bun test …` on what you touched or `bun run test:coverage` if you changed shared runtime or provider code.
 
 ## Repository structure
 
-**`src/`** — TypeScript for the CLI (providers, tools, MCP, UI). **`dist/cli.mjs`** is what the build produces; **`bin/openclaude`** is what users run and what npm wires up. **`package.json`** and **`tsconfig.json`** go with that stack.
-
-**`docs/`**, **`README.md`**, **`ANDROID_INSTALL.md`** — onboarding and reference only; nothing there executes as part of the agent.
-
-**`scripts/`** — build entrypoint, `doctor:*`, scans, coverage helpers.
-
-**`vscode-extension/`** — VS Code integration (separate from the npm CLI tarball).
-
-**`python/`** — small optional helpers; skip if you only care about the TypeScript CLI.
-
-**`.github/`** — workflows, Dependabot, issue/PR templates. **`.env.example`** — copy to `.env` when you need provider keys locally.
+The CLI is built from **`src/`** into **`dist/cli.mjs`**; **`bin/openclaude`** is the published entrypoint npm calls. Everything else is documentation, build/CI tooling, the VS Code add-on, optional **`python/`** helpers, or policy files at the repo root — each path is described under **Paths** below.
 
 **Layout**
 
@@ -309,7 +286,7 @@ flowchart TB
 
 **Clone vs npm install**
 
-Clone = everything in the chart. `npm install -g @dxiv/openclaude` only ships paths listed under `"files"` in `package.json` (currently `bin/`, `dist/cli.mjs`, `README.md`).
+A full **git clone** matches the chart. **`npm install -g @dxiv/openclaude`** only unpacks what `package.json` lists under `"files"` — right now `bin/`, `dist/cli.mjs`, and `README.md`.
 
 ```mermaid
 flowchart LR
@@ -357,9 +334,9 @@ flowchart LR
 - **`.env.example`** — Provider env template; copy to `.env` for local development
 - **Root** — `CONTRIBUTING.md`, `CHANGELOG.md`, `LEGAL.md`, `LICENSE`, `SECURITY.md`
 
-## VS Code Extension
+## VS Code extension
 
-[`vscode-extension/openclaude-vscode/`](vscode-extension/openclaude-vscode/) — launches the CLI from the editor, Control Centre in the sidebar, and the bundled terminal theme. See the [extension readme](vscode-extension/openclaude-vscode/README.md).
+[`vscode-extension/openclaude-vscode/`](vscode-extension/openclaude-vscode/): launch the CLI from the editor, Control Centre in the activity bar, bundled terminal theme. [Extension readme](vscode-extension/openclaude-vscode/README.md).
 
 ## Security
 
@@ -367,12 +344,12 @@ If you believe you found a security issue, see [SECURITY.md](SECURITY.md).
 
 ## Community
 
-- Use [GitHub Discussions](https://github.com/dxiv/OpenClaude/discussions) for Q&A, ideas, and community conversation
-- Use [GitHub Issues](https://github.com/dxiv/OpenClaude/issues) for confirmed bugs and actionable feature work
+- [Discussions](https://github.com/dxiv/OpenClaude/discussions) — questions, ideas, general chat
+- [Issues](https://github.com/dxiv/OpenClaude/issues) — bugs and concrete feature requests
 
 ## Contributing
 
-See **[CONTRIBUTING.md](CONTRIBUTING.md)** for clone → `bun install` → build, PR expectations, and checks. Larger changes: open an issue first.
+**[CONTRIBUTING.md](CONTRIBUTING.md)** covers clone, `bun install`, build, and what CI expects. Big or ambiguous changes: open an issue before a huge PR.
 
 ## Legal / trademarks
 
