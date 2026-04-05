@@ -264,6 +264,41 @@ Coverage output is written to `coverage/lcov.info`, and DXA Agent also generates
 
 ## Repository structure
 
+Block-style overview (representative — `src/` has many more top-level packages than shown):
+
+```text
+■■■ DXA Agent/
+        ■■■ .github/
+                ■■■ workflows/
+                ■■■ ISSUE_TEMPLATE/
+                ■■■ dependabot.yml
+                ■■■ pull_request_template.md
+        ■■■ bin/
+        ■■■ docs/
+        ■■■ python/
+        ■■■ scripts/
+        ■■■ src/
+                ■■■ assistant/
+                ■■■ bridge/
+                ■■■ cli/
+                ■■■ entrypoints/
+                ■■■ …
+        ■■■ vscode-extension/
+                ■■■ dxa-agent-vscode/
+                        ■■■ src/
+                        ■■■ themes/
+        ■■■ ANDROID_INSTALL.md
+        ■■■ CHANGELOG.md
+        ■■■ CONTRIBUTING.md
+        ■■■ LEGAL.md
+        ■■■ LICENSE
+        ■■■ SECURITY.md
+        ■■■ .env.example
+        ■■■ package.json
+        ■■■ tsconfig.json
+        ■■■ README.md
+```
+
 | Path | Purpose |
 | --- | --- |
 | `src/` | Core CLI and runtime |
