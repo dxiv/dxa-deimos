@@ -264,35 +264,15 @@ Coverage output is written to `coverage/lcov.info`, and DXA Agent also generates
 
 ## Repository structure
 
-**`src/`** is the terminal agent; it compiles to **`dist/cli.mjs`**. Everything else is docs, build plumbing, optional add-ons, or repo metadata. The diagrams below are a quick visual; **path details** are in the list under them (single place — no separate table).
+**`src/`** is the CLI/agent code; a build writes **`dist/cli.mjs`**. Everything else is either documentation, stuff that helps you build and ship, the VS Code add-on, or boring repo files (CI, licences, etc.).
 
-**Overview** (three layers — short labels so the diagram fits; see **Paths** for full names)
+Rough split:
 
-```mermaid
-flowchart TB
-  subgraph L1[Documentation]
-    A[Guides and onboarding only — not the running CLI]
-  end
-  subgraph L2[Terminal agent]
-    B[TypeScript in src/ — builds to dist/cli.mjs]
-  end
-  subgraph L3[Tooling and meta]
-    C[scripts/, VS Code extension, python/, .github/, policy docs]
-  end
-  L1 --> L2
-  L2 --> L3
-```
+- **Docs:** `docs/`, this `README`, `ANDROID_INSTALL.md`.
+- **Agent:** `src/`, `bin/`, `package.json`, `tsconfig.json`.
+- **Other:** `scripts/`, `vscode-extension/`, `python/`, `.github/`, `.env.example`, plus `CONTRIBUTING`, `CHANGELOG`, `LEGAL`, `LICENSE`, `SECURITY`.
 
-(Arrows only keep the diagram stacked top-to-bottom, not an execution order.)
-
-**Git clone vs npm install** (`package.json` → `"files"` decides what npm ships)
-
-```mermaid
-flowchart TB
-  CLONE["Git clone — full repository"]
-  NPM["npm package — bin/, dist/cli.mjs, README.md only"]
-  CLONE --> NPM
-```
+If you **clone** the repo you get all of that. The **npm** package is whatever is listed under `"files"` in `package.json` (currently `bin/`, `dist/cli.mjs`, and `README.md`).
 
 ### Paths
 
@@ -328,7 +308,7 @@ flowchart TB
 
 ## VS Code Extension
 
-Packaged as **Editor add-on** in [Repository structure](#repository-structure): [`vscode-extension/dxa-agent-vscode/`](vscode-extension/dxa-agent-vscode/) — launch integration, provider Control Centre UI, and terminal theme ([readme](vscode-extension/dxa-agent-vscode/README.md)).
+[`vscode-extension/dxa-agent-vscode/`](vscode-extension/dxa-agent-vscode/) — launches the CLI from the editor, Control Centre in the sidebar, and the bundled terminal theme. See the [extension readme](vscode-extension/dxa-agent-vscode/README.md).
 
 ## Security
 
