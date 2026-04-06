@@ -4,6 +4,7 @@ Changes for **[DXA Agent](https://github.com/dxiv/dxa-agent)** track the **`pack
 
 ## 0.2.0
 
+- **Windows clipboard:** Native copy on Windows writes UTF-8 to a temp file and uses PowerShell `Set-Clipboard` to read that file, avoiding `clip.exe` stdin so non-ASCII text copies correctly. Added `src/ink/termio/osc.test.ts`.
 - **Tooling:** TypeScript 6 `ignoreDeprecations` for `baseUrl` (prepare for TS 7 path mapping changes).
 - **Dependencies:** Major-range refresh — `chokidar` 5, `cli-boxes` 4, `supports-hyperlinks` 4, `undici` 8, `zod` 4. `lru-cache` stays on **11.2.7** (11.3+ ships ESM with top-level await that breaks the Bun bundle).
 - **VS Code extension:** Version aligned with the CLI package (`0.2.0`).
