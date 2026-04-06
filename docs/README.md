@@ -24,4 +24,4 @@ Pick a path by **experience** and **goal**:
 
 ---
 
-**Project:** [README.md](../README.md) · **npm:** [@dxa-dev/agent](https://www.npmjs.com/package/@dxa-dev/agent) · **Contribute:** [CONTRIBUTING.md](../CONTRIBUTING.md) · **Maintainers:** [maintainers.md](maintainers.md) · **Legal:** [LEGAL.md](../LEGAL.md) · **Security:** [SECURITY.md](../SECURITY.md)
+**Project:** [README.md](../README.md) · **npm:** [@dxa-dev/agent](https://www.npmjs.com/package/@dxa-dev/agent) · **GitHub Packages:** [dxa-dev/agent](https://github.com/orgs/dxa-dev/packages/npm/package/agent) · **Contribute:** [CONTRIBUTING.md](../CONTRIBUTING.md) · **Maintainers:** [maintainers.md](maintainers.md) · **Legal:** [LEGAL.md](../LEGAL.md) · **Security:** [SECURITY.md](../SECURITY.md)

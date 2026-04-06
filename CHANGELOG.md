@@ -1,6 +1,6 @@
 # Changelog
 
-Changes for **[DXA Agent](https://github.com/dxiv/dxa-agent)** track the **`package.json`** version. **npm:** [@dxa-dev/agent](https://www.npmjs.com/package/@dxa-dev/agent).
+Changes for **[DXA Agent](https://github.com/dxiv/dxa-agent)** track the **`package.json`** version. **npm:** [@dxa-dev/agent](https://www.npmjs.com/package/@dxa-dev/agent). **GitHub Packages:** [dxa-dev/agent](https://github.com/orgs/dxa-dev/packages/npm/package/agent).
 
 ## 0.2.2
 

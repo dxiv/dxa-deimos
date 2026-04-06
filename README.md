@@ -18,6 +18,7 @@
 [![Security Policy](https://img.shields.io/badge/security-policy-0f766e)](SECURITY.md)
 [![License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 [![npm](https://img.shields.io/npm/v/@dxa-dev/agent?label=npm&color=cb3837)](https://www.npmjs.com/package/@dxa-dev/agent)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-dxa--dev-24292f?logo=github)](https://github.com/orgs/dxa-dev/packages/npm/package/agent)
 
 [Quick start](#quick-start) · [Setup](#setup-guides) · [Providers](#supported-providers) · [Source build](#source-build-and-local-development) · [Repo layout](#repository-structure) · [VS Code](#vs-code-extension) · [Contributing](#contributing) · [Security](#security) · [Community](#community)
 
@@ -42,6 +43,8 @@ You need **Node.js 20+** and a terminal. If that’s new territory, use **[docs/
 ### Install
 
 **npm:** [@dxa-dev/agent](https://www.npmjs.com/package/@dxa-dev/agent)
+
+**GitHub Packages:** [dxa-dev / agent](https://github.com/orgs/dxa-dev/packages/npm/package/agent).
 
 Use **npm** to install the published CLI. **[GitHub](https://github.com/dxiv/dxa-agent)** is for source code, issues, and discussions—not a separate “installer” download.
 
@@ -413,6 +416,7 @@ If you believe you found a security issue, see [SECURITY.md](SECURITY.md).
 | **Compiler (Rust)** | [dxiv/dxa-compiler](https://github.com/dxiv/dxa-compiler) |
 | **WASM build (playground)** | [dxiv/dxa-wasm](https://github.com/dxiv/dxa-wasm) |
 | **This package (npm)** | [`@dxa-dev/agent`](https://www.npmjs.com/package/@dxa-dev/agent) |
+| **This package (GitHub Packages)** | [dxa-dev / agent](https://github.com/orgs/dxa-dev/packages/npm/package/agent) |
 | **This repository** | [github.com/dxiv/dxa-agent](https://github.com/dxiv/dxa-agent) |
 | **Discussions** | [GitHub Discussions](https://github.com/dxiv/dxa-agent/discussions) |
 | **Issues** | [GitHub Issues](https://github.com/dxiv/dxa-agent/issues) |

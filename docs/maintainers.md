@@ -2,7 +2,7 @@
 
 ## Aligning `src/` with [dxiv/dxa-agent](https://github.com/dxiv/dxa-agent)
 
-This fork keeps its own history, docs, npm package ([**`@dxa-dev/agent`**](https://www.npmjs.com/package/@dxa-dev/agent)), and CI. Runtime code under **`src/`** can be refreshed from upstream when you want feature parity.
+This fork keeps its own history, docs, npm package ([**`@dxa-dev/agent`**](https://www.npmjs.com/package/@dxa-dev/agent)), [GitHub Packages](https://github.com/orgs/dxa-dev/packages/npm/package/agent), and CI. Runtime code under **`src/`** can be refreshed from upstream when you want feature parity.
 
 1. Add the remote once: `git remote add upstream https://github.com/dxiv/dxa-agent.git` (skip if it already exists).
 2. `git fetch upstream main`

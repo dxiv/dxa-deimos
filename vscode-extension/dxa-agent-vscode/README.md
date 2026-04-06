@@ -28,7 +28,7 @@ A practical VS Code companion for DXA Agent with a project-aware **Control Cente
 ## Requirements
 
 - VS Code `1.95+`
-- `dxa-agent` available in your terminal PATH — install from npm: [**`@dxa-dev/agent`**](https://www.npmjs.com/package/@dxa-dev/agent) (`npm install -g @dxa-dev/agent`)
+- `dxa-agent` available in your terminal PATH — install from npm: [**`@dxa-dev/agent`**](https://www.npmjs.com/package/@dxa-dev/agent) (`npm install -g @dxa-dev/agent`); [GitHub Packages](https://github.com/orgs/dxa-dev/packages/npm/package/agent).
 
 ## Commands
 
