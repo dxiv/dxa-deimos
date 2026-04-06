@@ -1,6 +1,6 @@
 # Python utilities (optional)
 
-These modules are **not** required to install or run the main **OpenClaude** CLI (`npm install -g @dxiv/openclaude` or a normal `bun` source build).
+These modules are **not** required to install or run the main **DXA Agent** CLI (`npm install -g @dxiv/dxa-agent` or a normal `bun` source build).
 
 They are **optional helpers** for experimenting with OpenAI-compatible routing (for example Atomic Chat, Ollama) outside the TypeScript entrypoints. Use them if you are building a small sidecar or testing provider behaviour.
 
@@ -35,4 +35,4 @@ pytest -v
 
 ## Note
 
-Provider setup for day-to-day OpenClaude use is documented in the main guides: [Advanced Setup](../docs/advanced-setup.md) and the [README](../README.md). Legal / third-party notes: [LEGAL.md](../LEGAL.md).
+Provider setup for day-to-day DXA Agent use is documented in the main guides: [Advanced Setup](../docs/advanced-setup.md) and the [README](../README.md). Legal / third-party notes: [LEGAL.md](../LEGAL.md).

@@ -1,8 +1,8 @@
-# OpenClaude quick start — Windows
+# DXA Agent quick start — Windows
 
 **Audience:** Anyone on **Windows 10/11** using **PowerShell** (not CMD unless you know how to translate commands).
 
-**You will:** install Node (if needed), install OpenClaude with npm, set three environment variables for your chosen AI provider, then run `openclaude`.
+**You will:** install Node (if needed), install DXA Agent with npm, set three environment variables for your chosen AI provider, then run `dxa-agent`.
 
 **Other paths:** [Non-technical walkthrough](non-technical-setup.md) · [macOS / Linux](quick-start-mac-linux.md) · [Advanced / source build](advanced-setup.md) · [Troubleshooting](troubleshooting.md)
 
@@ -17,19 +17,19 @@
    npm --version
    ```
 
-2. **Ripgrep (`rg`)** — OpenClaude uses it for search. If the first run says `ripgrep not found`, install [Ripgrep for Windows](https://github.com/BurntSushi/ripgrep/releases) or `winget install BurntSushi.ripgrep.MSVC`, then open a **new** PowerShell and check `rg --version`.
+2. **Ripgrep (`rg`)** — DXA Agent uses it for search. If the first run says `ripgrep not found`, install [Ripgrep for Windows](https://github.com/BurntSushi/ripgrep/releases) or `winget install BurntSushi.ripgrep.MSVC`, then open a **new** PowerShell and check `rg --version`.
 
-3. **Git for Windows** (recommended) — gives you `bash.exe` for some agent features. If OpenClaude complains about bash, install [Git for Windows](https://git-scm.com/download/win) and see [Troubleshooting — Windows Git Bash](troubleshooting.md).
+3. **Git for Windows** (recommended) — gives you `bash.exe` for some agent features. If DXA Agent complains about bash, install [Git for Windows](https://git-scm.com/download/win) and see [Troubleshooting — Windows Git Bash](troubleshooting.md).
 
 ---
 
-## Install OpenClaude
+## Install DXA Agent
 
 ```powershell
-npm install -g @dxiv/openclaude
+npm install -g @dxiv/dxa-agent
 ```
 
-If `openclaude` is not found afterward, **close PowerShell completely**, open a new window, and try `openclaude` again. If it still fails, see [Troubleshooting](troubleshooting.md).
+If `dxa-agent` is not found afterward, **close PowerShell completely**, open a new window, and try `dxa-agent` again. If it still fails, see [Troubleshooting](troubleshooting.md).
 
 ---
 
@@ -57,7 +57,7 @@ $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_API_KEY="sk-your-key-here"
 $env:OPENAI_MODEL="gpt-4o"
 
-openclaude
+dxa-agent
 ```
 
 ---
@@ -70,7 +70,7 @@ $env:OPENAI_API_KEY="sk-your-key-here"
 $env:OPENAI_BASE_URL="https://api.deepseek.com/v1"
 $env:OPENAI_MODEL="deepseek-chat"
 
-openclaude
+dxa-agent
 ```
 
 ---
@@ -91,7 +91,7 @@ openclaude
    $env:OPENAI_BASE_URL="http://localhost:11434/v1"
    $env:OPENAI_MODEL="llama3.2:3b"
 
-   openclaude
+   DXA Agent
    ```
 
 Use the same model name you pulled (`ollama list` to see names).
@@ -108,7 +108,7 @@ $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_BASE_URL="http://localhost:1234/v1"
 $env:OPENAI_MODEL="your-model-name-from-lm-studio"
 
-openclaude
+dxa-agent
 ```
 
 If you get auth errors, try a dummy key:
@@ -138,11 +138,11 @@ Open a **new** PowerShell after this. **Warning:** your API key is stored in Win
 ## Update or remove
 
 ```powershell
-npm install -g @dxiv/openclaude@latest
+npm install -g @dxiv/dxa-agent@latest
 ```
 
 ```powershell
-npm uninstall -g @dxiv/openclaude
+npm uninstall -g @dxiv/dxa-agent
 ```
 
 ---
@@ -150,5 +150,5 @@ npm uninstall -g @dxiv/openclaude
 ## Next steps
 
 - **[Setup checklist](setup-checklist.md)** — verify each step if anything fails.
-- **[First run inside OpenClaude](first-run.md)** — `/help`, `/provider`, permissions, exiting.
+- **[First run inside DXA Agent](first-run.md)** — `/help`, `/provider`, permissions, exiting.
 - More providers: [Advanced setup](advanced-setup.md) · Problems: [Troubleshooting](troubleshooting.md)

@@ -1,6 +1,6 @@
-# Your first minutes in OpenClaude
+# Your first minutes in DXA Agent
 
-You already ran `openclaude` from a terminal and see the **interactive UI**. This page explains what to do next, in plain language.
+You already ran `dxa-agent` from a terminal and see the **interactive UI**. This page explains what to do next, in plain language.
 
 **Not installed yet?** Use [Non-technical setup](non-technical-setup.md) or [Windows](quick-start-windows.md) / [macOS / Linux](quick-start-mac-linux.md) first.
 
@@ -56,7 +56,7 @@ Anything **without** a leading `/` is sent to the model as a normal request, for
 - “Explain what `package.json` does in this folder.”
 - “Add error handling to the function in `src/foo.ts`.”
 
-**Tip:** `cd` to your **project folder** in the same terminal **before** running `openclaude`, so paths and git context match the code you care about.
+**Tip:** `cd` to your **project folder** in the same terminal **before** running `dxa-agent`, so paths and git context match the code you care about.
 
 ---
 
@@ -77,4 +77,4 @@ Anything **without** a leading `/` is sent to the model as a normal request, for
 
 ## 8. Next steps
 
-- [Troubleshooting](troubleshooting.md) · [Advanced setup](advanced-setup.md) · [README](../README.md) · [VS Code extension](../vscode-extension/openclaude-vscode/README.md)
+- [Troubleshooting](troubleshooting.md) · [Advanced setup](advanced-setup.md) · [README](../README.md) · [VS Code extension](../vscode-extension/dxa-agent-vscode/README.md)

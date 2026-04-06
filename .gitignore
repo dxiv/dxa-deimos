@@ -6,7 +6,7 @@ dist/
 .env
 .env.*
 !.env.example
-.openclaude-profile.json
+.dxa-agent-profile.json
 reports/
 coverage/
 .pytest_cache/

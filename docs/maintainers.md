@@ -1,17 +1,17 @@
 # Notes for maintainers
 
-## Aligning `src/` with [Gitlawb/openclaude](https://github.com/Gitlawb/openclaude)
+## Aligning `src/` with [dxiv/dxa-agent](https://github.com/dxiv/dxa-agent)
 
-This fork keeps its own history, docs, npm package (**`@dxiv/openclaude`**), and CI. Runtime code under **`src/`** can be refreshed from upstream when you want feature parity.
+This fork keeps its own history, docs, npm package (**`@dxiv/dxa-agent`**), and CI. Runtime code under **`src/`** can be refreshed from upstream when you want feature parity.
 
-1. Add the remote once: `git remote add upstream https://github.com/Gitlawb/openclaude.git` (skip if it already exists).
+1. Add the remote once: `git remote add upstream https://github.com/dxiv/dxa-agent.git` (skip if it already exists).
 2. `git fetch upstream main`
 3. Inspect diff: `git diff HEAD upstream/main --stat -- src/` (or a path inside `src/`).
 4. Bring changes in (examples):
    - **Whole tree:** `git checkout upstream/main -- src/`
    - **Single file:** `git checkout upstream/main -- path/to/file.ts`
 5. **`bun install`** then **`bun run build`**, **`bun test --max-concurrency=1`**, **`bun run smoke`**.
-6. Re-apply fork-specific bits if needed: root **`package.json`** name, **`scripts/build.ts`** `MACRO.ISSUES_EXPLAINER` / `MACRO.PACKAGE_URL`, **`bin/openclaude`**, **`vscode-extension/openclaude-vscode/README.md`** (`@dxiv/openclaude`), and any docs you do not want overwritten.
+6. Re-apply fork-specific bits if needed: root **`package.json`** name, **`scripts/build.ts`** `MACRO.ISSUES_EXPLAINER` / `MACRO.PACKAGE_URL`, **`bin/dxa-agent`**, **`vscode-extension/dxa-agent-vscode/README.md`** (`@dxiv/dxa-agent`), and any docs you do not want overwritten.
 
 See also [Troubleshooting → After merging or syncing `src/`](troubleshooting.md#after-merging-or-syncing-src-from-upstream).
 
@@ -50,7 +50,7 @@ Development and CI use **Bun** and **`bun.lock`**. **`package-lock.json`** is gi
 2. Update **[CHANGELOG.md](../CHANGELOG.md)** with a dated bullet list for that version.
 3. Commit and push; tag: `git tag v0.x.y && git push origin v0.x.y`.
 4. **GitHub Actions** builds **`dist/cli.mjs`** for each `v*` tag and uploads it as a workflow artifact (see `.github/workflows/release-artifacts.yml`). Download from the run’s **Artifacts** if you need the bundle without publishing npm.
-5. Publish **`@dxiv/openclaude`** to npm when ready (`npm publish` from a clean tree after `bun run build` / `prepack` — use your own npm org credentials).
+5. Publish **`@dxiv/dxa-agent`** to npm when ready (`npm publish` from a clean tree after `bun run build` / `prepack` — use your own npm org credentials).
 
 ## Suggested issue labels
 
@@ -68,4 +68,4 @@ Creating these in the GitHub UI helps triage (names are suggestions):
 
 ## Discussions
 
-Encourage: **Setup** questions and **Ideas** in [Discussions](https://github.com/dxiv/OpenClaude/discussions); **confirmed bugs** and **scoped work** in Issues.
+Encourage: **Setup** questions and **Ideas** in [Discussions](https://github.com/dxiv/dxa-agent/discussions); **confirmed bugs** and **scoped work** in Issues.

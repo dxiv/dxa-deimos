@@ -1,4 +1,4 @@
-# Legal information — OpenClaude
+# Legal information — DXA Agent
 
 **This document is for transparency. It is not legal advice.** If you need advice for your situation (employer policy, country of use, redistribution), talk to a solicitor or other qualified legal adviser.
 
@@ -6,13 +6,13 @@
 
 ## 1. What this repository is
 
-**OpenClaude** is **open source** software: a terminal coding agent with interactive prompts, tools, MCP, slash commands, and multiple model backends. **dxiv** and other contributors maintain it **independently** on GitHub.
+**DXA Agent** is **open source** software: a terminal coding agent with interactive prompts, tools, MCP, slash commands, and multiple model backends. **dxiv** and other contributors maintain it **independently** on GitHub.
 
 This project is **not** affiliated with, endorsed by, or sponsored by Anthropic, PBC, OpenAI, Google, GitHub, or any other model or platform vendor. Documentation may name third-party **products or APIs** only to explain configuration or interoperability (**descriptive use**—see §4).
 
 ## 2. Copyright and your licence to use this code
 
-The OpenClaude maintainers license **the source code and documentation in this repository** under the **MIT License**, unless a specific file states otherwise. The full text is in [LICENSE](LICENSE).
+The DXA Agent maintainers license **the source code and documentation in this repository** under the **MIT License**, unless a specific file states otherwise. The full text is in [LICENSE](LICENSE).
 
 Subject to the MIT conditions, you may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software.
 
@@ -28,9 +28,9 @@ Optional integrations may call **public APIs** or use **SDKs** published by thir
 
 Names such as **“Anthropic”**, **“Claude”**, **“Claude Code”**, **“OpenAI”**, **“Gemini”**, **“GitHub”**, and others are **trademarks** of their respective owners.
 
-Those names may appear in **documentation**, **configuration examples**, or **user-facing text** **only** where helpful to identify a **product**, **API**, or **setting** a user might already recognise. That is **descriptive (nominative) use**: it does **not** mean the trademark owner **built**, **runs**, or **endorses** OpenClaude, and it does **not** authorize use of their logos or trade dress as if they were ours.
+Those names may appear in **documentation**, **configuration examples**, or **user-facing text** **only** where helpful to identify a **product**, **API**, or **setting** a user might already recognise. That is **descriptive (nominative) use**: it does **not** mean the trademark owner **built**, **runs**, or **endorses** DXA Agent, and it does **not** authorize use of their logos or trade dress as if they were ours.
 
-**OpenClaude** is **our** project name.
+**DXA Agent** is **our** project name.
 
 ## 5. No warranty
 
@@ -59,4 +59,4 @@ We do **not** intend **false endorsement**, **trademark confusion**, or **bad-fa
 | Optional Python helpers (not the main CLI) | [python/README.md](python/README.md), [python/requirements.txt](python/requirements.txt) |
 | Environment variable examples | [.env.example](.env.example) |
 
-— dxiv / OpenClaude contributors
+— dxiv / DXA Agent contributors

@@ -1,8 +1,8 @@
-# OpenClaude quick start — macOS and Linux
+# DXA Agent quick start — macOS and Linux
 
 **Audience:** macOS or Linux users using **bash** or **zsh** in Terminal (or iTerm, etc.).
 
-**You will:** install Node (if needed), install OpenClaude with npm, `export` three environment variables for your AI provider, then run `openclaude`.
+**You will:** install Node (if needed), install DXA Agent with npm, `export` three environment variables for your AI provider, then run `dxa-agent`.
 
 **Other paths:** [Non-technical walkthrough](non-technical-setup.md) · [Windows](quick-start-windows.md) · [Advanced / source build](advanced-setup.md) · [Troubleshooting](troubleshooting.md)
 
@@ -24,22 +24,22 @@
    - **Fedora:** `sudo dnf install ripgrep`
    - **Arch:** `sudo pacman -S ripgrep`
 
-   Then run `rg --version`. If OpenClaude still complains, open a **new** terminal.
+   Then run `rg --version`. If DXA Agent still complains, open a **new** terminal.
 
 ---
 
-## Install OpenClaude
+## Install DXA Agent
 
 ```bash
-npm install -g @dxiv/openclaude
+npm install -g @dxiv/dxa-agent
 ```
 
 If you see `EACCES` / permission errors, either:
 
 - use a Node version manager ([nvm](https://github.com/nvm-sh/nvm), [fnm](https://github.com/Schniz/fnm), etc.), **or**
-- run with `sudo npm install -g @dxiv/openclaude` (less ideal but common on first setup).
+- run with `sudo npm install -g @dxiv/dxa-agent` (less ideal but common on first setup).
 
-If `openclaude` is not found, close the terminal, open a new one, and try again. Check `npm bin -g` is on your `PATH` (`echo $PATH`).
+If `dxa-agent` is not found, close the terminal, open a new one, and try again. Check `npm bin -g` is on your `PATH` (`echo $PATH`).
 
 ---
 
@@ -65,7 +65,7 @@ export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_API_KEY=sk-your-key-here
 export OPENAI_MODEL=gpt-4o
 
-openclaude
+dxa-agent
 ```
 
 ---
@@ -78,7 +78,7 @@ export OPENAI_API_KEY=sk-your-key-here
 export OPENAI_BASE_URL=https://api.deepseek.com/v1
 export OPENAI_MODEL=deepseek-chat
 
-openclaude
+dxa-agent
 ```
 
 ---
@@ -99,7 +99,7 @@ openclaude
    export OPENAI_BASE_URL=http://localhost:11434/v1
    export OPENAI_MODEL=llama3.2:3b
 
-   openclaude
+   DXA Agent
    ```
 
 Match `OPENAI_MODEL` to a name from `ollama list`.
@@ -116,7 +116,7 @@ export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_BASE_URL=http://localhost:1234/v1
 export OPENAI_MODEL=your-model-name-from-lm-studio
 
-openclaude
+dxa-agent
 ```
 
 If the server returns auth errors:
@@ -149,11 +149,11 @@ Then run `source ~/.zshrc` or open a new tab.
 ## Update or remove
 
 ```bash
-npm install -g @dxiv/openclaude@latest
+npm install -g @dxiv/dxa-agent@latest
 ```
 
 ```bash
-npm uninstall -g @dxiv/openclaude
+npm uninstall -g @dxiv/dxa-agent
 ```
 
 ---
@@ -161,5 +161,5 @@ npm uninstall -g @dxiv/openclaude
 ## Next steps
 
 - **[Setup checklist](setup-checklist.md)** — verify prerequisites and env vars.
-- **[First run inside OpenClaude](first-run.md)** — `/help`, `/provider`, exiting safely.
+- **[First run inside DXA Agent](first-run.md)** — `/help`, `/provider`, exiting safely.
 - Full env table and Bun workflows: [Advanced setup](advanced-setup.md) · Issues: [Troubleshooting](troubleshooting.md)

@@ -2,7 +2,7 @@
 atomic_chat_provider.py
 -----------------------
 Optional helper: local Atomic Chat (OpenAI-compatible `/v1` API), often on
-Apple Silicon at 127.0.0.1:1337. Not used by the main OpenClaude CLI.
+Apple Silicon at 127.0.0.1:1337. Not used by the main DXA Agent CLI.
 
 Messages are forwarded without translation (OpenAI chat-completions shape).
 

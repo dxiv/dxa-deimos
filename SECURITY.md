@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes target the latest **`main`** branch and the latest **`@dxiv/openclaude`** npm release.
+Security fixes target the latest **`main`** branch and the latest **`@dxiv/dxa-agent`** npm release.
 
 | Version | Supported |
 | ------- | --------- |
@@ -17,7 +17,7 @@ Static analysis (**CodeQL Advanced**) runs on **`main`**, pull requests, and a w
 
 ## Reporting a Vulnerability
 
-If you believe you have found a security vulnerability in OpenClaude, please
+If you believe you have found a security vulnerability in DXA Agent, please
 report it privately.
 
 Preferred reporting channel:
@@ -59,9 +59,9 @@ report.
 
 This policy applies to:
 
-- the OpenClaude source code in this repository
+- the DXA Agent source code in this repository
 - official release artifacts published from this repository
-- the `@dxiv/openclaude` npm package
+- the `@dxiv/dxa-agent` npm package
 
 This policy does not cover:
 

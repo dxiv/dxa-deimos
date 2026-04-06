@@ -2,7 +2,7 @@
 ollama_provider.py
 ------------------
 Optional helper: talk to a local Ollama server from Python (Anthropic-shaped
-responses for experiments or sidecars). Not used by the main OpenClaude CLI.
+responses for experiments or sidecars). Not used by the main DXA Agent CLI.
 
 Typical models: llama3, mistral, codellama, phi3, qwen2, deepseek-coder, etc.
 No API key required for local Ollama.

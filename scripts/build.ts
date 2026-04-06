@@ -1,5 +1,5 @@
 /**
- * OpenClaude build script — bundles the TypeScript source into a single
+ * DXA Agent build script — bundles the TypeScript source into a single
  * distributable JS file using Bun's bundler.
  *
  * Handles:
@@ -56,13 +56,13 @@ const result = await Bun.build({
     // MACRO.* build-time constants
     // Keep the internal compatibility version high enough to pass
     // first-party minimum-version guards, but expose the real package
-    // version separately in OpenClaude branding.
+    // version separately in DXA Agent branding.
     'MACRO.VERSION': JSON.stringify('99.0.0'),
     'MACRO.DISPLAY_VERSION': JSON.stringify(version),
     'MACRO.BUILD_TIME': JSON.stringify(new Date().toISOString()),
     'MACRO.ISSUES_EXPLAINER':
-      JSON.stringify('report the issue at https://github.com/dxiv/OpenClaude/issues'),
-    'MACRO.PACKAGE_URL': JSON.stringify('@dxiv/openclaude'),
+      JSON.stringify('report the issue at https://github.com/dxiv/dxa-agent/issues'),
+    'MACRO.PACKAGE_URL': JSON.stringify('@dxiv/dxa-agent'),
     'MACRO.NATIVE_PACKAGE_URL': 'undefined',
   },
   plugins: [
@@ -392,4 +392,4 @@ if (!result.success) {
   process.exit(1)
 }
 
-console.log(`✓ Built openclaude v${version} → dist/cli.mjs`)
+console.log(`✓ Built dxa-agent v${version} → dist/cli.mjs`)

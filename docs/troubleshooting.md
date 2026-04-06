@@ -1,16 +1,16 @@
 # Troubleshooting
 
-## `openclaude` command not found after `npm install -g`
+## `dxa-agent` command not found after `npm install -g`
 
 1. **Close the terminal completely** and open a new one — global npm bins are often picked up only in new sessions.
 2. **Check npm’s global bin directory** is on your `PATH`:
    - Run `npm prefix -g` — on many systems the binary is under `<that path>/bin` (Mac/Linux) or `<that path>` (some Windows setups).
-   - Run `npm bin -g` (older npm) or look for `openclaude.cmd` / `openclaude` under the global folder.
+   - Run `npm bin -g` (older npm) or look for `dxa-agent.cmd` / `dxa-agent` under the global folder.
 3. **Windows:** “App execution aliases” can steal `node`/`npm` — Settings → Apps → Advanced app settings → App execution aliases — turn **off** aliases for `node.exe` if the wrong runtime runs.
 4. **Fallback without fixing PATH (temporary):**
 
    ```bash
-   npx --yes @dxiv/openclaude@latest
+   npx --yes @dxiv/dxa-agent@latest
    ```
 
    (Still set your provider env vars in the same shell first.) This is slower than a global install but confirms the package works.
@@ -21,7 +21,7 @@
 
 ## `ripgrep not found` / `rg` missing
 
-OpenClaude expects **`rg`** on your `PATH`. Install [ripgrep](https://github.com/BurntSushi/ripgrep) for your OS, open a **new** terminal, then run `rg --version`.
+DXA Agent expects **`rg`** on your `PATH`. Install [ripgrep](https://github.com/BurntSushi/ripgrep) for your OS, open a **new** terminal, then run `rg --version`.
 
 ## Windows: Git Bash (`bash.exe`)
 
@@ -49,7 +49,7 @@ If the CLI says it cannot find bash, install [Git for Windows](https://git-scm.c
 
 ## After merging or syncing `src/` from upstream
 
-If you pull a large update to `src/` (for example from [Gitlawb/openclaude](https://github.com/Gitlawb/openclaude)):
+If you pull a large update to `src/` (for example from [dxiv/dxa-agent](https://github.com/dxiv/dxa-agent)):
 
 1. **`git fetch upstream`** (or your remote name) and merge or cherry-pick as you prefer.
 2. From the repo root: **`bun install`** (or `bun install --frozen-lockfile` in CI) so `node_modules` matches **`bun.lock`**.
@@ -57,11 +57,11 @@ If you pull a large update to `src/` (for example from [Gitlawb/openclaude](http
 4. **`bun test --max-concurrency=1`** — same flags as PR CI; catches env-sensitive tests.
 5. If something still looks wrong, remove **`dist/`** and rebuild once (generated output only).
 
-Reconcile **branding** after syncing: root **`package.json`**, **`scripts/build.ts`** (`MACRO.*` strings), **`bin/openclaude`**, and **`vscode-extension/openclaude-vscode/README.md`** (install line should stay **`@dxiv/openclaude`** for this fork).
+Reconcile **branding** after syncing: root **`package.json`**, **`scripts/build.ts`** (`MACRO.*` strings), **`bin/dxa-agent`**, and **`vscode-extension/dxa-agent-vscode/README.md`** (install line should stay **`@dxiv/dxa-agent`** for this fork).
 
 ## `dist/cli.mjs` not found
 
-Run `bun run build` from the repository root, or use `bun run dev` for development. The `openclaude` shim in `bin/` only runs a **built** `dist/cli.mjs`.
+Run `bun run build` from the repository root, or use `bun run dev` for development. The `dxa-agent` shim in `bin/` only runs a **built** `dist/cli.mjs`.
 
 ## Provider / model “not found”
 
@@ -70,8 +70,8 @@ Run `bun run build` from the repository root, or use `bun run dev` for developme
 
 ## VS Code extension shows “command not found”
 
-Install the CLI globally (`npm install -g @dxiv/openclaude`) **or** ensure the `openclaude` you built is on the **same PATH** VS Code’s integrated terminal uses. See [extension README](../vscode-extension/openclaude-vscode/README.md).
+Install the CLI globally (`npm install -g @dxiv/dxa-agent`) **or** ensure the `dxa-agent` you built is on the **same PATH** VS Code’s integrated terminal uses. See [extension README](../vscode-extension/dxa-agent-vscode/README.md).
 
 ## Still stuck?
 
-Search [Discussions](https://github.com/dxiv/OpenClaude/discussions) or open a thread with OS, OpenClaude version, provider, and the **exact** error text (redact API keys).
+Search [Discussions](https://github.com/dxiv/dxa-agent/discussions) or open a thread with OS, DXA Agent version, provider, and the **exact** error text (redact API keys).

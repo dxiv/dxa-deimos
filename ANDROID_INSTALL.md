@@ -1,6 +1,6 @@
-# OpenClaude on Android (Termux)
+# DXA Agent on Android (Termux)
 
-Run OpenClaude on Android with **Termux** + **proot-distro** (Ubuntu). **Bun** is used to build the CLI; Bun’s Linux build runs inside Ubuntu, not on bare Termux.
+Run DXA Agent on Android with **Termux** + **proot-distro** (Ubuntu). **Bun** is used to build the CLI; Bun’s Linux build runs inside Ubuntu, not on bare Termux.
 
 **Legal note:** third-party apps (Termux, OpenRouter, model hosts) have their own terms—this guide only describes one way to build and run this repo.
 
@@ -34,12 +34,12 @@ pkg install git proot-distro
 
 ### Step 3 — Clone this repository
 
-GitHub creates a folder named **`OpenClaude`** (capital **O** and **C**):
+GitHub creates a folder named **`dxa-agent`** (capital **O** and **C**):
 
 ```bash
 cd ~
-git clone https://github.com/dxiv/OpenClaude.git
-cd OpenClaude
+git clone https://github.com/dxiv/dxa-agent.git
+cd dxa-agent
 ```
 
 Stay on this clone path for all later `cd` commands.
@@ -66,7 +66,7 @@ bun --version  # should show 1.3.11+
 From **inside** Ubuntu, point at your clone (adjust only if your home layout differs):
 
 ```bash
-cd /data/data/com.termux/files/home/OpenClaude
+cd /data/data/com.termux/files/home/dxa-agent
 bun install
 bun run build
 ```
@@ -87,7 +87,7 @@ source ~/.bashrc
 
 Replace `your_openrouter_key_here` with your actual key from [openrouter.ai/keys](https://openrouter.ai/keys).
 
-### Step 8 — Run OpenClaude
+### Step 8 — Run DXA Agent
 
 ```bash
 node dist/cli.mjs
@@ -103,7 +103,7 @@ Every time you reopen Termux after killing it, run:
 
 ```bash
 proot-distro login ubuntu
-cd /data/data/com.termux/files/home/OpenClaude
+cd /data/data/com.termux/files/home/dxa-agent
 node dist/cli.mjs
 ```
 
@@ -144,4 +144,4 @@ Some free inference hosts hit **tokens-per-minute** limits with large system pro
 
 - **Don't swipe Termux away** from recent apps mid-session — use the home button to minimize instead.
 - The Ubuntu environment persists between Termux sessions; your build and config are saved.
-- Run `bun run build` again only if you pull updates to the OpenClaude repo.
+- Run `bun run build` again only if you pull updates to the DXA Agent repo.

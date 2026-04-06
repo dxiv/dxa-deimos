@@ -1,14 +1,14 @@
-# OpenClaude
+# DXA Agent
 
-**OpenClaude** is an MIT-licensed terminal coding agent: one `openclaude` command, pluggable model backends (Anthropic Claude, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), tools, MCP, and slash commands. This repo ships the CLI plus a **VS Code extension** and a dark terminal theme.
+**DXA Agent** is an MIT-licensed terminal coding agent: one `dxa-agent` command, pluggable model backends (Anthropic Claude, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), tools, MCP, and slash commands. This repo ships the CLI plus a **VS Code extension** and a dark terminal theme.
 
 **Legal:** not affiliated with Anthropic, PBC, or any other vendor. Trademarks, MIT terms, and how to raise concerns: **[LEGAL.md](LEGAL.md)** (general information only—not legal advice).
 
-**Upstream:** this repo is an independent distribution (**`@dxiv/openclaude`** on npm). Core CLI behaviour is periodically aligned with **[Gitlawb/openclaude](https://github.com/Gitlawb/openclaude)** (see [docs/maintainers.md](docs/maintainers.md) for how to sync `src/`). Docs, legal framing, CI, and packaging here are specific to this fork.
+**Upstream:** this repo is an independent distribution (**`@dxiv/dxa-agent`** on npm). Core CLI behaviour is periodically aligned with **[dxiv/dxa-agent](https://github.com/dxiv/dxa-agent)** (see [docs/maintainers.md](docs/maintainers.md) for how to sync `src/`). Docs, legal framing, CI, and packaging here are specific to this fork.
 
-[![PR Checks](https://github.com/dxiv/OpenClaude/actions/workflows/pr-checks.yml/badge.svg?branch=main)](https://github.com/dxiv/OpenClaude/actions/workflows/pr-checks.yml)
-[![Release](https://img.shields.io/github/v/tag/dxiv/OpenClaude?label=release&color=0ea5e9)](https://github.com/dxiv/OpenClaude/tags)
-[![Discussions](https://img.shields.io/badge/discussions-open-7c3aed)](https://github.com/dxiv/OpenClaude/discussions)
+[![PR Checks](https://github.com/dxiv/dxa-agent/actions/workflows/pr-checks.yml/badge.svg?branch=main)](https://github.com/dxiv/dxa-agent/actions/workflows/pr-checks.yml)
+[![Release](https://img.shields.io/github/v/tag/dxiv/dxa-agent?label=release&color=0ea5e9)](https://github.com/dxiv/dxa-agent/tags)
+[![Discussions](https://img.shields.io/badge/discussions-open-7c3aed)](https://github.com/dxiv/dxa-agent/discussions)
 [![Security Policy](https://img.shields.io/badge/security-policy-0f766e)](SECURITY.md)
 [![License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 
@@ -31,7 +31,7 @@ You need **Node.js 20+** and a terminal. If that’s new territory, use **[docs/
 ### Install
 
 ```bash
-npm install -g @dxiv/openclaude
+npm install -g @dxiv/dxa-agent
 ```
 
 Install **[ripgrep](https://github.com/BurntSushi/ripgrep)** and ensure `rg` is on your `PATH`. If the CLI prints `ripgrep not found`, fix `PATH`, then open a **new** terminal window — [Troubleshooting](docs/troubleshooting.md) has more detail.
@@ -39,10 +39,10 @@ Install **[ripgrep](https://github.com/BurntSushi/ripgrep)** and ensure `rg` is 
 ### Start
 
 ```bash
-openclaude
+dxa-agent
 ```
 
-Inside OpenClaude:
+Inside DXA Agent:
 
 - run `/provider` for guided provider setup and saved profiles
 - run `/onboard-github` for GitHub Models onboarding
@@ -56,7 +56,7 @@ export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_API_KEY=sk-your-key-here
 export OPENAI_MODEL=gpt-4o
 
-openclaude
+dxa-agent
 ```
 
 Windows PowerShell:
@@ -66,7 +66,7 @@ $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_API_KEY="sk-your-key-here"
 $env:OPENAI_MODEL="gpt-4o"
 
-openclaude
+dxa-agent
 ```
 
 ### Fastest local Ollama setup
@@ -78,7 +78,7 @@ export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_BASE_URL=http://localhost:11434/v1
 export OPENAI_MODEL=qwen2.5-coder:7b
 
-openclaude
+dxa-agent
 ```
 
 Windows PowerShell:
@@ -88,7 +88,7 @@ $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_BASE_URL="http://localhost:11434/v1"
 $env:OPENAI_MODEL="qwen2.5-coder:7b"
 
-openclaude
+dxa-agent
 ```
 
 ## Setup guides
@@ -128,23 +128,23 @@ Advanced / source build:
 - **Streaming responses**: Real-time token output and tool progress
 - **Tool calling**: Multi-step tool loops with model calls, tool execution, and follow-up responses
 - **Images**: URL and base64 image inputs for providers that support vision
-- **Provider profiles**: Guided setup plus saved `.openclaude-profile.json` support
+- **Provider profiles**: Guided setup plus saved `.dxa-agent-profile.json` support
 - **Local and remote model backends**: Cloud APIs, local servers, and Apple Silicon local inference
 
 ## Provider notes
 
-OpenClaude supports multiple providers, but behaviour is not identical across all of them.
+DXA Agent supports multiple providers, but behaviour is not identical across all of them.
 
 - Anthropic-specific features may not exist on other providers
 - Tool quality depends heavily on the selected model
 - Smaller local models can struggle with long multi-step tool flows
-- Some providers impose lower output caps than the CLI defaults, and OpenClaude adapts where possible
+- Some providers impose lower output caps than the CLI defaults, and DXA Agent adapts where possible
 
 For best results, use models with strong tool/function calling support.
 
 ## Agent routing
 
-OpenClaude can route different agents to different models through settings-based routing. This is useful for cost optimisation or splitting work by model strength.
+DXA Agent can route different agents to different models through settings-based routing. This is useful for cost optimisation or splitting work by model strength.
 
 Add to `~/.claude/settings.json`:
 
@@ -180,7 +180,7 @@ By default, `WebSearch` works on non-Anthropic models using DuckDuckGo. This giv
 
 DuckDuckGo fallback scrapes search results; it can be rate-limited or blocked. For something sturdier, wire up Firecrawl below.
 
-For Anthropic-native backends and Codex responses, OpenClaude keeps the native provider web search behaviour.
+For Anthropic-native backends and Codex responses, DXA Agent keeps the native provider web search behaviour.
 
 `WebFetch` works, but its basic HTTP plus HTML-to-markdown path can still fail on JavaScript-rendered sites or sites that block plain HTTP requests.
 
@@ -253,7 +253,7 @@ Before opening a PR, a sensible smoke pass is `bun run build`, `bun run smoke`, 
 
 ## Repository structure
 
-The CLI is built from **`src/`** into **`dist/cli.mjs`**; **`bin/openclaude`** is the published entrypoint npm calls. Everything else is documentation, build/CI tooling, the VS Code add-on, optional **`python/`** helpers, or policy files at the repo root — each path is described under **Paths** below.
+The CLI is built from **`src/`** into **`dist/cli.mjs`**; **`bin/dxa-agent`** is the published entrypoint npm calls. Everything else is documentation, build/CI tooling, the VS Code add-on, optional **`python/`** helpers, or policy files at the repo root — each path is described under **Paths** below.
 
 **Layout**
 
@@ -290,7 +290,7 @@ flowchart TB
 
 **Clone vs npm install**
 
-A full **git clone** matches the chart. **`npm install -g @dxiv/openclaude`** only unpacks what `package.json` lists under `"files"` — right now `bin/`, `dist/cli.mjs`, and `README.md`.
+A full **git clone** matches the chart. **`npm install -g @dxiv/dxa-agent`** only unpacks what `package.json` lists under `"files"` — right now `bin/`, `dist/cli.mjs`, and `README.md`.
 
 ```mermaid
 flowchart LR
@@ -316,7 +316,7 @@ flowchart LR
 #### Terminal agent
 
 - **`src/`** — Core CLI and runtime (providers, tools, MCP, UI)
-- **`bin/`** — `openclaude` launcher (runs `dist/cli.mjs` when built)
+- **`bin/`** — `dxa-agent` launcher (runs `dist/cli.mjs` when built)
 - **`package.json`** — Metadata, scripts, and the published [`files`](package.json) list
 - **`tsconfig.json`** — TypeScript project for `src/`
 
@@ -326,7 +326,7 @@ flowchart LR
 
 #### Editor add-on
 
-- **`vscode-extension/openclaude-vscode/`** — VS Code integration and terminal theme ([extension readme](vscode-extension/openclaude-vscode/README.md))
+- **`vscode-extension/dxa-agent-vscode/`** — VS Code integration and terminal theme ([extension readme](vscode-extension/dxa-agent-vscode/README.md))
 
 #### Optional
 
@@ -341,7 +341,7 @@ flowchart LR
 
 ## VS Code extension
 
-[`vscode-extension/openclaude-vscode/`](vscode-extension/openclaude-vscode/): launch the CLI from the editor, Control Centre in the activity bar, bundled terminal theme. [Extension readme](vscode-extension/openclaude-vscode/README.md).
+[`vscode-extension/dxa-agent-vscode/`](vscode-extension/dxa-agent-vscode/): launch the CLI from the editor, Control Centre in the activity bar, bundled terminal theme. [Extension readme](vscode-extension/dxa-agent-vscode/README.md).
 
 ## Security
 
@@ -349,8 +349,8 @@ If you believe you found a security issue, see [SECURITY.md](SECURITY.md).
 
 ## Community
 
-- [Discussions](https://github.com/dxiv/OpenClaude/discussions) — questions, ideas, general chat
-- [Issues](https://github.com/dxiv/OpenClaude/issues) — bugs and concrete feature requests
+- [Discussions](https://github.com/dxiv/dxa-agent/discussions) — questions, ideas, general chat
+- [Issues](https://github.com/dxiv/dxa-agent/issues) — bugs and concrete feature requests
 
 ## Contributing
 

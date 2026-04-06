@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Reproducible problem in OpenClaude
+about: Reproducible problem in DXA Agent
 title: ""
 labels: ""
 assignees: ""
@@ -26,7 +26,7 @@ What happened instead?
 
 ## Environment
 
-- OpenClaude version:
+- DXA Agent version:
 - OS:
 - Terminal:
 - Provider:

@@ -8,7 +8,7 @@ assignees: ""
 
 ## Summary
 
-What should OpenClaude do differently?
+What should DXA Agent do differently?
 
 ## Problem
 

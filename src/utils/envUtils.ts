@@ -10,13 +10,11 @@ export const getClaudeConfigHomeDir = memoize(
     if (process.env.CLAUDE_CONFIG_DIR) {
       return process.env.CLAUDE_CONFIG_DIR.normalize('NFC')
     }
-    const newDefault = join(homedir(), '.openclaude')
-    // Migration compatibility: if ~/.openclaude doesn't exist yet but ~/.claude
-    // does, keep using ~/.claude so existing users don't lose their data on
-    // upgrade. New installs (neither dir exists) go straight to ~/.openclaude.
-    const legacyPath = join(homedir(), '.claude')
-    if (!existsSync(newDefault) && existsSync(legacyPath)) {
-      return legacyPath.normalize('NFC')
+    const newDefault = join(homedir(), '.dxa-agent')
+    // Migration: if ~/.dxa-agent does not exist yet but ~/.claude does, keep using ~/.claude.
+    const legacyClaude = join(homedir(), '.claude')
+    if (!existsSync(newDefault) && existsSync(legacyClaude)) {
+      return legacyClaude.normalize('NFC')
     }
     return newDefault.normalize('NFC')
   },

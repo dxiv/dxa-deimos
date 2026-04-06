@@ -23,7 +23,7 @@ Environment (optional — see repo `.env.example`):
     ROUTER_STRATEGY=balanced   # or: latency, cost
     ROUTER_FALLBACK=true
 
-Project: https://github.com/dxiv/OpenClaude
+Project: https://github.com/dxiv/dxa-agent
 """
 
 import asyncio

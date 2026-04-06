@@ -1,17 +1,17 @@
 # Setup checklist
 
-Use this to verify your machine **before** and **after** installing OpenClaude. Check boxes as you go.
+Use this to verify your machine **before** and **after** installing DXA Agent. Check boxes as you go.
 
 ---
 
-## Before you run `openclaude`
+## Before you run `dxa-agent`
 
 - [ ] **Node.js 20+** installed (`node --version` shows v20 or higher).
 - [ ] **npm** works (`npm --version`).
 - [ ] **Ripgrep** installed (`rg --version`). If missing, see [Troubleshooting — ripgrep](troubleshooting.md).
-- [ ] **Windows only:** [Git for Windows](https://git-scm.com/download/win) installed if OpenClaude asks for `bash.exe` (see [Troubleshooting](troubleshooting.md)).
+- [ ] **Windows only:** [Git for Windows](https://git-scm.com/download/win) installed if DXA Agent asks for `bash.exe` (see [Troubleshooting](troubleshooting.md)).
 - [ ] **Cloud provider:** API key ready **or** **local:** Ollama / LM Studio installed and running with a model loaded.
-- [ ] You ran **`npm install -g @dxiv/openclaude`** and a **new** terminal if `openclaude` was not found right away.
+- [ ] You ran **`npm install -g @dxiv/dxa-agent`** and a **new** terminal if `dxa-agent` was not found right away.
 
 ---
 
@@ -28,7 +28,7 @@ Remember: variables set with `export` / `$env:` usually **reset when you close t
 
 ---
 
-## After `openclaude` starts
+## After `dxa-agent` starts
 
 - [ ] You see the interactive UI (not an immediate crash).
 - [ ] `/help` shows a command list.
@@ -40,5 +40,5 @@ Remember: variables set with `export` / `$env:` usually **reset when you close t
 ## Still broken?
 
 1. [Troubleshooting](troubleshooting.md)  
-2. [GitHub Discussions](https://github.com/dxiv/OpenClaude/discussions) (search your error text)  
+2. [GitHub Discussions](https://github.com/dxiv/dxa-agent/discussions) (search your error text)  
 3. [Non-technical setup](non-technical-setup.md) (re-read from the top)

@@ -13,9 +13,9 @@ const {
 } = require('./state');
 const { buildControlCenterViewModel } = require('./presentation');
 
-const OPENCLAUDE_REPO_URL = 'https://github.com/Gitlawb/openclaude';
-const OPENCLAUDE_SETUP_URL = 'https://github.com/Gitlawb/openclaude/blob/main/README.md#quick-start';
-const PROFILE_FILE_NAME = '.openclaude-profile.json';
+const DXA_AGENT_REPO_URL = 'https://github.com/dxiv/dxa-agent';
+const DXA_AGENT_SETUP_URL = 'https://github.com/dxiv/dxa-agent/blob/main/README.md#quick-start';
+const PROFILE_FILE_NAME = '.dxa-agent-profile.json';
 
 function escapeHtml(value) {
   return String(value)
@@ -201,9 +201,9 @@ function readWorkspaceProfile(profilePath) {
 }
 
 async function collectControlCenterState() {
-  const configured = vscode.workspace.getConfiguration('openclaude');
-  const launchCommand = configured.get('launchCommand', 'openclaude');
-  const terminalName = configured.get('terminalName', 'OpenClaude');
+  const configured = vscode.workspace.getConfiguration('dxaAgent');
+  const launchCommand = configured.get('launchCommand', 'dxa-agent');
+  const terminalName = configured.get('terminalName', 'DXA Agent');
   const shimEnabled = configured.get('useOpenAIShim', false);
   const executable = getExecutableFromCommand(launchCommand);
   const launchWorkspace = resolveLaunchWorkspace();
@@ -259,11 +259,11 @@ async function collectControlCenterState() {
   };
 }
 
-async function launchOpenClaude(options = {}) {
+async function launchDxaAgent(options = {}) {
   const { requireWorkspace = false } = options;
-  const configured = vscode.workspace.getConfiguration('openclaude');
-  const launchCommand = configured.get('launchCommand', 'openclaude');
-  const terminalName = configured.get('terminalName', 'OpenClaude');
+  const configured = vscode.workspace.getConfiguration('dxaAgent');
+  const launchCommand = configured.get('launchCommand', 'dxa-agent');
+  const terminalName = configured.get('terminalName', 'DXA Agent');
   const shimEnabled = configured.get('useOpenAIShim', false);
   const executable = getExecutableFromCommand(launchCommand);
   const launchWorkspace = resolveLaunchWorkspace();
@@ -288,15 +288,15 @@ async function launchOpenClaude(options = {}) {
 
   if (!installed) {
     const action = await vscode.window.showErrorMessage(
-      `OpenClaude command not found: ${executable}. Install it with: npm install -g @dxiv/openclaude`,
+      `DXA Agent command not found: ${executable}. Install it with: npm install -g @dxiv/dxa-agent`,
       'Open Setup Guide',
       'Open Repository',
     );
 
     if (action === 'Open Setup Guide') {
-      await vscode.env.openExternal(vscode.Uri.parse(OPENCLAUDE_SETUP_URL));
+      await vscode.env.openExternal(vscode.Uri.parse(DXA_AGENT_SETUP_URL));
     } else if (action === 'Open Repository') {
-      await vscode.env.openExternal(vscode.Uri.parse(OPENCLAUDE_REPO_URL));
+      await vscode.env.openExternal(vscode.Uri.parse(DXA_AGENT_REPO_URL));
     }
 
     return;
@@ -420,7 +420,7 @@ function getWorkspaceRootActionDetail(status, fallbackDetail) {
   }
 
   if (status.launchActionsShareTargetReason === 'relative-launch-command') {
-    return `Same workspace-root target as Launch OpenClaude because the relative command resolves from the workspace root · ${status.workspaceRootCwdLabel}`;
+    return `Same workspace-root target as Launch DXA Agent because the relative command resolves from the workspace root · ${status.workspaceRootCwdLabel}`;
   }
 
   return `Always starts at the workspace root · ${status.workspaceRootCwdLabel}`;
@@ -838,7 +838,7 @@ function renderControlCenterHtml(status, options = {}) {
         <div class="hero-top">
           <div class="brand">
             <div class="eyebrow">${escapeHtml(viewModel.header.eyebrow)}</div>
-            <div class="wordmark" aria-label="OpenClaude wordmark">Open<span class="wordmark-accent">Claude</span></div>
+            <div class="wordmark" aria-label="DXA Agent wordmark">DXA<span class="wordmark-accent"> Agent</span></div>
             <div class="headline">
               <h1 class="headline-title" id="control-center-title">${escapeHtml(viewModel.header.title)}</h1>
               <p class="headline-subtitle">${escapeHtml(viewModel.header.subtitle)}</p>
@@ -878,11 +878,11 @@ function renderControlCenterHtml(status, options = {}) {
             </button>
             <button class="support-link" id="repo" type="button">
               <span class="support-link-label">Open Repository</span>
-              <span class="summary-detail">Browse the upstream OpenClaude project.</span>
+              <span class="summary-detail">Browse the DXA Agent repository.</span>
             </button>
             <button class="support-link" id="commands" type="button">
               <span class="support-link-label">Open Command Palette</span>
-              <span class="summary-detail">Access VS Code and OpenClaude commands quickly.</span>
+              <span class="summary-detail">Access VS Code and DXA Agent commands quickly.</span>
             </button>
           </div>
         </section>
@@ -912,7 +912,7 @@ function renderControlCenterHtml(status, options = {}) {
 </html>`;
 }
 
-class OpenClaudeControlCenterProvider {
+class DxaAgentControlCenterProvider {
   constructor() {
     this.webviewView = null;
   }
@@ -930,19 +930,19 @@ class OpenClaudeControlCenterProvider {
     webviewView.webview.onDidReceiveMessage(async message => {
       switch (message?.type) {
         case 'launch':
-          await launchOpenClaude();
+          await launchDxaAgent();
           break;
         case 'launchRoot':
-          await launchOpenClaude({ requireWorkspace: true });
+          await launchDxaAgent({ requireWorkspace: true });
           break;
         case 'openProfile':
           await openWorkspaceProfile();
           break;
         case 'repo':
-          await vscode.env.openExternal(vscode.Uri.parse(OPENCLAUDE_REPO_URL));
+          await vscode.env.openExternal(vscode.Uri.parse(DXA_AGENT_REPO_URL));
           break;
         case 'setup':
-          await vscode.env.openExternal(vscode.Uri.parse(OPENCLAUDE_SETUP_URL));
+          await vscode.env.openExternal(vscode.Uri.parse(DXA_AGENT_SETUP_URL));
           break;
         case 'commands':
           await vscode.commands.executeCommand('workbench.action.showCommands');
@@ -1041,46 +1041,46 @@ class OpenClaudeControlCenterProvider {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  const provider = new OpenClaudeControlCenterProvider();
+  const provider = new DxaAgentControlCenterProvider();
   const refreshProvider = () => {
     void provider.refresh();
   };
 
-  const startCommand = vscode.commands.registerCommand('openclaude.start', async () => {
-    await launchOpenClaude();
+  const startCommand = vscode.commands.registerCommand('dxaAgent.start', async () => {
+    await launchDxaAgent();
   });
 
   const startInWorkspaceRootCommand = vscode.commands.registerCommand(
-    'openclaude.startInWorkspaceRoot',
+    'dxaAgent.startInWorkspaceRoot',
     async () => {
-      await launchOpenClaude({ requireWorkspace: true });
+      await launchDxaAgent({ requireWorkspace: true });
     },
   );
 
-  const openDocsCommand = vscode.commands.registerCommand('openclaude.openDocs', async () => {
-    await vscode.env.openExternal(vscode.Uri.parse(OPENCLAUDE_REPO_URL));
+  const openDocsCommand = vscode.commands.registerCommand('dxaAgent.openDocs', async () => {
+    await vscode.env.openExternal(vscode.Uri.parse(DXA_AGENT_REPO_URL));
   });
 
   const openSetupDocsCommand = vscode.commands.registerCommand(
-    'openclaude.openSetupDocs',
+    'dxaAgent.openSetupDocs',
     async () => {
-      await vscode.env.openExternal(vscode.Uri.parse(OPENCLAUDE_SETUP_URL));
+      await vscode.env.openExternal(vscode.Uri.parse(DXA_AGENT_SETUP_URL));
     },
   );
 
   const openWorkspaceProfileCommand = vscode.commands.registerCommand(
-    'openclaude.openWorkspaceProfile',
+    'dxaAgent.openWorkspaceProfile',
     async () => {
       await openWorkspaceProfile();
     },
   );
 
-  const openUiCommand = vscode.commands.registerCommand('openclaude.openControlCenter', async () => {
-    await vscode.commands.executeCommand('workbench.view.extension.openclaude');
+  const openUiCommand = vscode.commands.registerCommand('dxaAgent.openControlCenter', async () => {
+    await vscode.commands.executeCommand('workbench.view.extension.dxaAgent');
   });
 
   const providerDisposable = vscode.window.registerWebviewViewProvider(
-    'openclaude.controlCenter',
+    'dxaAgent.controlCenter',
     provider,
   );
 
@@ -1096,7 +1096,7 @@ function activate(context) {
     providerDisposable,
     profileWatcher,
     vscode.workspace.onDidChangeConfiguration(event => {
-      if (event.affectsConfiguration('openclaude')) {
+      if (event.affectsConfiguration('dxaAgent')) {
         refreshProvider();
       }
     }),
@@ -1113,7 +1113,7 @@ function deactivate() {}
 module.exports = {
   activate,
   deactivate,
-  OpenClaudeControlCenterProvider,
+  DxaAgentControlCenterProvider,
   renderControlCenterHtml,
   resolveLaunchTargets,
 };

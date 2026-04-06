@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 dxiv and OpenClaude contributors
+Copyright (c) 2026 dxiv and DXA Agent contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ remains under its own license and copyright; see the package metadata
 Trademarks
 
 "Anthropic", "Claude", and "Claude Code" are trademarks of Anthropic, PBC.
-OpenClaude is independently maintained open source and is not affiliated with,
+DXA Agent is independently maintained open source and is not affiliated with,
 endorsed by, or sponsored by Anthropic or any other model provider. References
 to those names are for factual description only (for example, optional APIs,
 configuration flags, or interoperability), not to suggest origin or endorsement.

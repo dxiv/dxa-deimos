@@ -1,11 +1,11 @@
-# Contributing to OpenClaude
+# Contributing to DXA Agent
 
 Thanks for contributing. I merge patches that are **small, tested, and easy to review**.
 
 ## Before you start
 
 - Read **[LEGAL.md](LEGAL.md)** once (copyright, third-party deps, trademarks—short).
-- Search [issues](https://github.com/dxiv/OpenClaude/issues) and [discussions](https://github.com/dxiv/OpenClaude/discussions) before opening a new thread.
+- Search [issues](https://github.com/dxiv/dxa-agent/issues) and [discussions](https://github.com/dxiv/dxa-agent/discussions) before opening a new thread.
 - **Issues:** confirmed bugs and concrete feature work. **Discussions:** setup questions, ideas.
 - **Larger changes:** open an issue first so scope is agreed.
 - **Security:** [SECURITY.md](SECURITY.md) (private report, not a public issue).
@@ -116,7 +116,7 @@ If the PR changes provider behaviour, mention which provider path was tested.
 
 ## Provider Changes
 
-OpenClaude supports multiple provider paths. If you change provider logic:
+DXA Agent supports multiple provider paths. If you change provider logic:
 
 - be explicit about which providers are affected
 - avoid breaking third-party providers while fixing first-party behaviour

@@ -9,8 +9,8 @@ test('truncateMiddle keeps the profile filename visible', () => {
   const { truncateMiddle } = loadPresentation();
 
   assert.equal(
-    truncateMiddle('/Users/example/projects/openclaude/workspace/.openclaude-profile.json', 30),
-    '.../.openclaude-profile.json',
+    truncateMiddle('/Users/example/projects/dxa-agent/workspace/.dxa-agent-profile.json', 30),
+    '.../.dxa-agent-profile.json',
   );
 });
 
@@ -18,8 +18,8 @@ test('truncateMiddle keeps the filename visible for Windows-style paths', () => 
   const { truncateMiddle } = loadPresentation();
 
   assert.equal(
-    truncateMiddle('C:\\Users\\example\\openclaude\\workspace\\.openclaude-profile.json', 30),
-    '...\\.openclaude-profile.json',
+    truncateMiddle('C:\\Users\\example\\dxa-agent\\workspace\\.dxa-agent-profile.json', 30),
+    '...\\.dxa-agent-profile.json',
   );
 });
 
@@ -50,7 +50,7 @@ test('buildActionModel hides workspace-profile action when no profile exists', (
 
   assert.deepEqual(model.primary, {
     id: 'launch',
-    label: 'Launch OpenClaude',
+    label: 'Launch DXA Agent',
     detail: 'Use the resolved project-aware launch directory',
     tone: 'accent',
     disabled: false,
@@ -63,13 +63,13 @@ test('buildActionModel includes workspace-profile action when a profile exists',
 
   const model = buildActionModel({
     canLaunchInWorkspaceRoot: true,
-    workspaceProfilePath: 'C:\\Users\\example\\openclaude\\workspace\\.openclaude-profile.json',
+    workspaceProfilePath: 'C:\\Users\\example\\dxa-agent\\workspace\\.dxa-agent-profile.json',
   });
 
   assert.deepEqual(model.openProfile, {
     id: 'openProfile',
     label: 'Open Workspace Profile',
-    detail: 'Inspect ...\\.openclaude-profile.json',
+    detail: 'Inspect ...\\.dxa-agent-profile.json',
     tone: 'neutral',
     disabled: false,
   });
@@ -78,18 +78,18 @@ test('buildActionModel includes workspace-profile action when a profile exists',
 function createStatus(overrides = {}) {
   return {
     installed: true,
-    executable: 'openclaude',
-    launchCommand: 'openclaude --project-aware',
-    terminalName: 'OpenClaude',
+    executable: 'dxa-agent',
+    launchCommand: 'dxa-agent --project-aware',
+    terminalName: 'DXA Agent',
     shimEnabled: false,
-    workspaceFolder: '/workspace/openclaude',
+    workspaceFolder: '/workspace/dxa-agent',
     workspaceSourceLabel: 'active editor workspace',
-    launchCwd: '/workspace/openclaude',
-    launchCwdLabel: '/workspace/openclaude',
+    launchCwd: '/workspace/dxa-agent',
+    launchCwdLabel: '/workspace/dxa-agent',
     canLaunchInWorkspaceRoot: true,
     profileStatusLabel: 'Found',
-    profileStatusHint: '/workspace/openclaude/.openclaude-profile.json',
-    workspaceProfilePath: '/workspace/openclaude/.openclaude-profile.json',
+    profileStatusHint: '/workspace/dxa-agent/.dxa-agent-profile.json',
+    workspaceProfilePath: '/workspace/dxa-agent/.dxa-agent-profile.json',
     providerState: {
       label: 'Codex',
       detail: 'gpt-5.4',
@@ -166,14 +166,14 @@ test('buildControlCenterViewModel uses a concise project summary before full pat
         {
           key: 'workspace',
           label: 'Workspace folder',
-          summary: 'openclaude',
-          detail: '/workspace/openclaude · active editor workspace',
+          summary: 'dxa-agent',
+          detail: '/workspace/dxa-agent · active editor workspace',
         },
         {
           key: 'profileStatus',
           label: 'Workspace profile',
           summary: 'Found',
-          detail: '/workspace/openclaude/.openclaude-profile.json',
+          detail: '/workspace/dxa-agent/.dxa-agent-profile.json',
           tone: 'neutral',
         },
       ],
@@ -183,9 +183,9 @@ test('buildControlCenterViewModel uses a concise project summary before full pat
       rows: [
         {
           key: 'runtime',
-          label: 'OpenClaude executable',
+          label: 'DXA Agent executable',
           summary: 'Installed',
-          detail: 'openclaude',
+          detail: 'dxa-agent',
           tone: 'positive',
         },
         {
@@ -208,8 +208,8 @@ test('buildControlCenterViewModel keeps launch command only in summary cards', (
   assert.deepEqual(viewModel.summaryCards.find(card => card.key === 'launchCommand'), {
     key: 'launchCommand',
     label: 'Launch command',
-    value: 'openclaude --project-aware',
-    detail: 'Integrated terminal: OpenClaude',
+    value: 'dxa-agent --project-aware',
+    detail: 'Integrated terminal: DXA Agent',
   });
 
   assert.equal(

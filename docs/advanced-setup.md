@@ -1,4 +1,4 @@
-# OpenClaude advanced setup
+# DXA Agent advanced setup
 
 **Who this is for:** Developers and power users who want to **clone this repo**, use **Bun**, run **`bun run build`**, use **profile launchers** (`profile:init`, `dev:profile`), **`doctor:*` diagnostics**, or copy-paste **many provider examples**.
 
@@ -11,7 +11,7 @@
 ### Option A: npm
 
 ```bash
-npm install -g @dxiv/openclaude
+npm install -g @dxiv/dxa-agent
 ```
 
 ### Option B: From source with Bun
@@ -19,8 +19,8 @@ npm install -g @dxiv/openclaude
 Use Bun `1.3.11` or newer for source builds on Windows. Older Bun versions can fail during `bun run build`.
 
 ```bash
-git clone https://github.com/dxiv/OpenClaude.git
-cd OpenClaude
+git clone https://github.com/dxiv/dxa-agent.git
+cd dxa-agent
 
 bun install
 bun run build
@@ -30,8 +30,8 @@ npm link
 ### Option C: Run directly with Bun
 
 ```bash
-git clone https://github.com/dxiv/OpenClaude.git
-cd OpenClaude
+git clone https://github.com/dxiv/dxa-agent.git
+cd dxa-agent
 
 bun install
 bun run dev
@@ -52,7 +52,7 @@ export OPENAI_MODEL=gpt-4o
 `codexplan` maps to GPT-5.4 on the Codex backend with high reasoning.
 `codexspark` maps to GPT-5.3 Codex Spark for faster loops.
 
-If you already use the Codex CLI, OpenClaude reads `~/.codex/auth.json` automatically. You can also point it elsewhere with `CODEX_AUTH_JSON_PATH` or override the token directly with `CODEX_API_KEY`.
+If you already use the Codex CLI, DXA Agent reads `~/.codex/auth.json` automatically. You can also point it elsewhere with `CODEX_AUTH_JSON_PATH` or override the token directly with `CODEX_API_KEY`.
 
 ```bash
 export CLAUDE_CODE_USE_OPENAI=1
@@ -61,7 +61,7 @@ export OPENAI_MODEL=codexplan
 # optional if you do not already have ~/.codex/auth.json
 export CODEX_API_KEY=...
 
-openclaude
+dxa-agent
 ```
 
 ### DeepSeek
@@ -167,7 +167,7 @@ export OPENAI_MODEL=gpt-4o
 | `CODEX_API_KEY` | Codex only | Codex or ChatGPT access token override |
 | `CODEX_AUTH_JSON_PATH` | Codex only | Path to a Codex CLI `auth.json` file |
 | `CODEX_HOME` | Codex only | Alternative Codex home directory |
-| `OPENCLAUDE_DISABLE_CO_AUTHORED_BY` | No | Suppress the default `Co-Authored-By` trailer in generated git commits |
+| `DXA_AGENT_DISABLE_CO_AUTHORED_BY` | No | Suppress the default `Co-Authored-By` trailer in generated git commits |
 
 You can also use `ANTHROPIC_MODEL` to override the model name. `OPENAI_MODEL` takes priority.
 
@@ -233,7 +233,7 @@ bun run profile:init -- --provider atomic-chat
 # codex bootstrap with a fast model alias
 bun run profile:init -- --provider codex --model codexspark
 
-# launch using persisted profile (.openclaude-profile.json)
+# launch using persisted profile (.dxa-agent-profile.json)
 bun run dev:profile
 
 # codex profile (uses CODEX_API_KEY or ~/.codex/auth.json)

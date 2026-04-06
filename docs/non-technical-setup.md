@@ -1,6 +1,6 @@
-# OpenClaude setup for new users
+# DXA Agent setup for new users
 
-This page is for you if you want OpenClaude running **without** cloning the repo or touching the source code. You will use **Node.js** (to run the installer), a **terminal** (a text window where you type commands), and an account or app from an **AI provider** (OpenAI, Ollama, etc.).
+This page is for you if you want DXA Agent running **without** cloning the repo or touching the source code. You will use **Node.js** (to run the installer), a **terminal** (a text window where you type commands), and an account or app from an **AI provider** (OpenAI, Ollama, etc.).
 
 **Already comfortable with terminals and npm?** Skip to [Windows](quick-start-windows.md) or [macOS / Linux](quick-start-mac-linux.md), or go straight to [Advanced setup](advanced-setup.md) for building from source.
 
@@ -47,27 +47,27 @@ You should see a version number. If either command fails, reinstall Node from [n
 
 ---
 
-## 4. Install OpenClaude (one command)
+## 4. Install DXA Agent (one command)
 
 In the same terminal:
 
 ```text
-npm install -g @dxiv/openclaude
+npm install -g @dxiv/dxa-agent
 ```
 
-Wait until it finishes. This downloads the OpenClaude command-line tool onto your machine.
+Wait until it finishes. This downloads the DXA Agent command-line tool onto your machine.
 
-**If you see permission errors:** on Mac/Linux you may need `sudo npm install -g @dxiv/openclaude` (you will be prompted for your password). On Windows, run PowerShell **as Administrator** once, or fix npm’s global folder using [npm’s permission docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+**If you see permission errors:** on Mac/Linux you may need `sudo npm install -g @dxiv/dxa-agent` (you will be prompted for your password). On Windows, run PowerShell **as Administrator** once, or fix npm’s global folder using [npm’s permission docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
 ---
 
-## 5. Tell OpenClaude which AI to use (three “settings”)
+## 5. Tell DXA Agent which AI to use (three “settings”)
 
-OpenClaude needs three pieces of information for the common **OpenAI-compatible** path. You set them as **environment variables** — think of them as temporary settings for that terminal window.
+DXA Agent needs three pieces of information for the common **OpenAI-compatible** path. You set them as **environment variables** — think of them as temporary settings for that terminal window.
 
 | Setting | Plain English |
 | --- | --- |
-| `CLAUDE_CODE_USE_OPENAI=1` | “Use the OpenAI-style connection path” (this is how OpenClaude talks to many providers, not only OpenAI). |
+| `CLAUDE_CODE_USE_OPENAI=1` | “Use the OpenAI-style connection path” (this is how DXA Agent talks to many providers, not only OpenAI). |
 | `OPENAI_API_KEY` | Your **secret key** from the provider (or leave unset for some local setups). |
 | `OPENAI_MODEL` | Which model name to request (for example `gpt-4o` or an Ollama model name). |
 
@@ -79,34 +79,34 @@ OpenClaude needs three pieces of information for the common **OpenAI-compatible*
 
 Do **not** mix Windows and Mac instructions in the same window.
 
-- **Windows (PowerShell):** [OpenClaude quick start — Windows](quick-start-windows.md)  
-- **macOS or Linux:** [OpenClaude quick start — macOS / Linux](quick-start-mac-linux.md)
+- **Windows (PowerShell):** [DXA Agent quick start — Windows](quick-start-windows.md)  
+- **macOS or Linux:** [DXA Agent quick start — macOS / Linux](quick-start-mac-linux.md)
 
 Each guide has **one provider at a time** (OpenAI, DeepSeek, Ollama, or LM Studio). Pick **one** block, paste the commands, then run:
 
 ```text
-openclaude
+dxa-agent
 ```
 
 ---
 
 ## 7. First success
 
-When it works, OpenClaude opens in the terminal. Next:
+When it works, DXA Agent opens in the terminal. Next:
 
 1. Use the **[setup checklist](setup-checklist.md)** to confirm each prerequisite.
-2. Read **[Your first minutes in OpenClaude](first-run.md)** — try **`/help`**, then **`/provider`**, then a short question in plain English.
+2. Read **[Your first minutes in DXA Agent](first-run.md)** — try **`/help`**, then **`/provider`**, then a short question in plain English.
 
 ---
 
 ## 8. If something goes wrong
 
 1. **[Troubleshooting](troubleshooting.md)** — “command not found”, PATH, ripgrep, API errors, Ollama.
-2. **[GitHub Discussions](https://github.com/dxiv/OpenClaude/discussions)** — search your error text.
+2. **[GitHub Discussions](https://github.com/dxiv/dxa-agent/discussions)** — search your error text.
 3. **Developers** cloning the repo: [Advanced setup](advanced-setup.md) and the root [README](../README.md).
 
 ---
 
 ## 9. Legal note (short)
 
-OpenClaude is an independent open source project. Third-party names (OpenAI, Ollama, etc.) refer to those products so you know which service to sign up for — not an endorsement. Details: [LEGAL.md](../LEGAL.md).
+DXA Agent is an independent open source project. Third-party names (OpenAI, Ollama, etc.) refer to those products so you know which service to sign up for — not an endorsement. Details: [LEGAL.md](../LEGAL.md).

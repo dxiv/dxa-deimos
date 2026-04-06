@@ -1,4 +1,4 @@
-# Optional helpers under python/ — not required for the main OpenClaude CLI.
+# Optional helpers under python/ — not required for the main DXA Agent CLI.
 # Install:  pip install -r python/requirements.txt
 #
 # Python 3.10+ recommended (3.11+ preferred).
