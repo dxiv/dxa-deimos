@@ -2,6 +2,11 @@
 
 Changes for **[DXA Agent](https://github.com/dxiv/dxa-agent)** track the **`package.json`** version. **npm:** [@dxa-dev/agent](https://www.npmjs.com/package/@dxa-dev/agent).
 
+## 0.2.1
+
+- GitHub Packages publish on `v*` tags; maintainer notes updated.
+- **VS Code extension:** Version aligned with the CLI package (`0.2.1`).
+
 ## 0.2.0
 
 - **Windows clipboard:** Native copy on Windows writes UTF-8 to a temp file and uses PowerShell `Set-Clipboard` to read that file, avoiding `clip.exe` stdin so non-ASCII text copies correctly. Added `src/ink/termio/osc.test.ts`.

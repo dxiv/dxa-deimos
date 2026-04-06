@@ -23,6 +23,7 @@ See also [Troubleshooting → After merging or syncing `src/`](troubleshooting.m
 | [codeql.yml](../.github/workflows/codeql.yml) | **CodeQL Advanced** — Actions, JavaScript/TypeScript, Python on `main`, PRs, and weekly schedule |
 | [dependabot-bun-lock.yml](../.github/workflows/dependabot-bun-lock.yml) | Refreshes `bun.lock` on Dependabot PRs when needed |
 | [release-artifacts.yml](../.github/workflows/release-artifacts.yml) | Tagged release artifacts |
+| [publish-github-packages.yml](../.github/workflows/publish-github-packages.yml) | Publishes to GitHub Packages on `v*` tags (optional secret `GH_PACKAGES_TOKEN`) |
 
 **Codecov:** the coverage job uses **`use_oidc: true`** (see [Codecov GitHub OIDC](https://docs.codecov.com/docs/github-oidc)). Enable the Codecov GitHub app or connect the repo in Codecov’s UI if uploads do not appear. If OIDC is not an option, switch the step to a repository secret **`CODECOV_TOKEN`** and drop `use_oidc`.
 
@@ -49,12 +50,8 @@ Development and CI use **Bun** and **`bun.lock`**. **`package-lock.json`** is gi
 1. Bump **`package.json`** version (and extension `package.json` if it should track the CLI).
 2. Update **[CHANGELOG.md](../CHANGELOG.md)** with a dated bullet list for that version.
 3. Commit and push; tag: `git tag v0.x.y && git push origin v0.x.y`.
-4. **GitHub Actions** builds **`dist/cli.mjs`** for each `v*` tag and uploads it as a workflow artifact (see `.github/workflows/release-artifacts.yml`). Download from the run’s **Artifacts** if you need the bundle without publishing npm. The same `v*` tag triggers **`.github/workflows/publish-github-packages.yml`**, which publishes the package to **GitHub Packages** ([npm registry on GitHub](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)).
-
-   **GitHub Packages and `@dxa-dev`:** On GitHub, the npm scope **`@dxa-dev`** must match a **real GitHub user or organization** named `dxa-dev`. If you see **`403 … owner not found`** (or similar), it usually means: (a) there is **no** GitHub org/user `dxa-dev` yet — [create the org](https://github.com/organizations/new) with that exact name if you want this scope; or (b) the repository lives under a **different** account (e.g. `dxiv/dxa-agent`), so the workflow’s **`GITHUB_TOKEN`** is not allowed to publish into the **`dxa-dev`** package namespace.
-
-   **Fix:** Add a repository secret **`GH_PACKAGES_TOKEN`**: a **classic** personal access token with at least **`write:packages`** (and usually **`read:packages`**) for an account that is allowed to publish packages for the **`dxa-dev`** org (org owner, or role with packages write). The workflow uses `GH_PACKAGES_TOKEN` when set, otherwise `GITHUB_TOKEN`. Alternatively, **transfer** this repository into the **`dxa-dev`** organization so the default token can publish (subject to org settings).
-5. Publish [**`@dxa-dev/agent`**](https://www.npmjs.com/package/@dxa-dev/agent) to the **public npm registry** when ready (`npm publish` from a clean tree after `bun run build` / `prepack` — `package.json` `publishConfig.registry` points at **registry.npmjs.org**; use your npm org credentials). Installing from GitHub Packages instead requires a **`.npmrc`** line such as `@dxa-dev:registry=https://npm.pkg.github.com` and a **classic PAT** with `read:packages` (see GitHub’s npm Packages docs).
+4. **Release artifacts:** `.github/workflows/release-artifacts.yml` uploads **`dist/cli.mjs`** for each `v*` tag. **GitHub Packages:** `.github/workflows/publish-github-packages.yml` runs on the same tags; optional repo secret **`GH_PACKAGES_TOKEN`** if the default token cannot publish the **`@dxa-dev`** scope. Registry details: [GitHub npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
+5. **npmjs.org:** `npm publish` uses **`publishConfig.registry`** in **`package.json`** (public npm). Use your npm credentials.
 
 ## Suggested issue labels
 
