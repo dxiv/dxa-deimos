@@ -8,6 +8,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch: # Run manually from Actions tab without a new tag
 
 permissions:
   contents: read
