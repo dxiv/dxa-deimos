@@ -43,6 +43,8 @@ You need **Node.js 20+** and a terminal. If that’s new territory, use **[docs/
 
 **npm:** [@dxa-agent/dxa-agent](https://www.npmjs.com/package/@dxa-agent/dxa-agent)
 
+Use **npm** to install the published CLI. **[GitHub](https://github.com/dxiv/dxa-agent)** is for source code, issues, and discussions—not a separate “installer” download.
+
 ```bash
 npm install -g @dxa-agent/dxa-agent
 ```
@@ -347,7 +349,7 @@ flowchart LR
 #### Terminal agent
 
 - **`src/`** — Core CLI and runtime (providers, tools, MCP, UI)
-- **`bin/`** — `dxa-agent` launcher (runs `dist/cli.mjs` when built)
+- **`bin/`** — `dxa-agent.mjs` launcher (npm exposes the `dxa-agent` command; runs `dist/cli.mjs` when built)
 - **`package.json`** — Metadata, scripts, and the published [`files`](package.json) list
 - **`tsconfig.json`** — TypeScript project for `src/`
 
