@@ -121,7 +121,7 @@
     "cli",
     "llm"
   ],
-  "homepage": "https://www.npmjs.com/package/@dxa-dev/deimos",
+  "homepage": "https://www.npmjs.com/package/@dxa-deimos/cli",
   "repository": {
     "type": "git",
     "url": "https://github.com/dxiv/dxa-deimos"

@@ -1,6 +1,6 @@
 # Deimos setup for new users
 
-**[Deimos](https://dxa.dev/deimos/)** — terminal coding agent from **[DXA](https://dxa.dev)**. Install the published CLI [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos); no clone required for this path.
+**[Deimos](https://dxa.dev/deimos/)** — terminal coding agent from **[DXA](https://dxa.dev)**. Install the published CLI [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli); no clone required for this path.
 
 This page is for you if you want Deimos running **without** cloning the repo or touching the source code. You will use **Node.js** (to run the installer), a **terminal** (a text window where you type commands), and an account or app from an **AI provider** (OpenAI, Ollama, etc.).
 
@@ -51,17 +51,17 @@ You should see a version number. If either command fails, reinstall Node from [n
 
 ## 4. Install Deimos (one command)
 
-Published package: [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos) on npm.
+Published package: [**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli) on npm.
 
 In the same terminal:
 
 ```text
-npm install -g @dxa-dev/deimos
+npm install -g @dxa-deimos/cli
 ```
 
 Wait until it finishes. This downloads the Deimos command-line tool onto your machine.
 
-**If you see permission errors:** on Mac/Linux you may need `sudo npm install -g @dxa-dev/deimos` (you will be prompted for your password). On Windows, run PowerShell **as Administrator** once, or fix npm’s global folder using [npm’s permission docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+**If you see permission errors:** on Mac/Linux you may need `sudo npm install -g @dxa-deimos/cli` (you will be prompted for your password). On Windows, run PowerShell **as Administrator** once, or fix npm’s global folder using [npm’s permission docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
 ---
 

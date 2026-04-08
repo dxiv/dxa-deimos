@@ -11,7 +11,7 @@ Use this to verify your machine **before** and **after** installing **[Deimos](h
 - [ ] **Ripgrep** installed (`rg --version`). If missing, see [Troubleshooting — ripgrep](troubleshooting.md).
 - [ ] **Windows only:** [Git for Windows](https://git-scm.com/download/win) installed if Deimos asks for `bash.exe` (see [Troubleshooting](troubleshooting.md)).
 - [ ] **Cloud provider:** API key ready **or** **local:** Ollama / LM Studio installed and running with a model loaded.
-- [ ] You ran **`npm install -g @dxa-dev/deimos`** ([npm](https://www.npmjs.com/package/@dxa-dev/deimos)) and a **new** terminal if `deimos` was not found right away.
+- [ ] You ran **`npm install -g @dxa-deimos/cli`** ([npm](https://www.npmjs.com/package/@dxa-deimos/cli)) and a **new** terminal if `deimos` was not found right away.
 
 ---
 

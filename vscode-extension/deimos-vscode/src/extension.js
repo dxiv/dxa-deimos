@@ -289,7 +289,7 @@ async function launchDeimos(options = {}) {
 
   if (!installed) {
     const action = await vscode.window.showErrorMessage(
-      `deimos command not found: ${executable}. Install: https://www.npmjs.com/package/@dxa-dev/deimos (npm install -g @dxa-dev/deimos)`,
+      `deimos command not found: ${executable}. Install: https://www.npmjs.com/package/@dxa-deimos/cli (npm install -g @dxa-deimos/cli)`,
       'Open Setup Guide',
       'Open Repository',
     );

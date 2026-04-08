@@ -1,6 +1,6 @@
 # Contributing to Deimos
 
-**[Deimos](https://dxa.dev/deimos/)** · [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos) · npm [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)
+**[Deimos](https://dxa.dev/deimos/)** · [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos) · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 Contributions are welcome. Patches are easiest to merge when they are **small, tested, and scoped to one concern**.
 
@@ -12,7 +12,7 @@ Contributions are welcome. Patches are easiest to merge when they are **small, t
 - **Larger changes:** open an issue first so scope is agreed.
 - **Security:** [SECURITY.md](SECURITY.md) (private report, not a public issue).
 
-**Docs map:** [docs/README.md](docs/README.md) · [Cheatsheet](docs/CHEATSHEET.md) · [npm package](https://www.npmjs.com/package/@dxa-dev/deimos) · [GitHub Packages](https://github.com/orgs/dxa-dev/packages/npm/package/deimos) · [Non-technical setup](docs/non-technical-setup.md) · [Setup checklist](docs/setup-checklist.md) · [First run](docs/first-run.md) · [Troubleshooting](docs/troubleshooting.md) · [README](README.md) · [Advanced setup](docs/advanced-setup.md) · [Android](ANDROID_INSTALL.md) · [Python helpers (optional)](python/README.md).
+**Docs map:** [docs/README.md](docs/README.md) · [Cheatsheet](docs/CHEATSHEET.md) · [npm package](https://www.npmjs.com/package/@dxa-deimos/cli) · [GitHub Packages](https://github.com/orgs/dxa-dev/packages/npm/package/cli) · [Non-technical setup](docs/non-technical-setup.md) · [Setup checklist](docs/setup-checklist.md) · [First run](docs/first-run.md) · [Troubleshooting](docs/troubleshooting.md) · [README](README.md) · [Advanced setup](docs/advanced-setup.md) · [Android](ANDROID_INSTALL.md) · [Python helpers (optional)](python/README.md).
 
 **Secrets:** never commit API keys, tokens, or `.env` — redact them in logs and issue text. `.gitignore` already excludes `.env*`.
 

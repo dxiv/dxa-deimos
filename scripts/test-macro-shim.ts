@@ -21,6 +21,6 @@ const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
   BUILD_TIME: new Date().toISOString(),
   ISSUES_EXPLAINER: 'https://github.com/dxiv/dxa-deimos/issues',
   FEEDBACK_CHANNEL: 'https://github.com/dxiv/dxa-deimos/issues',
-  PACKAGE_URL: pkg.name ?? '@dxa-dev/deimos',
+  PACKAGE_URL: pkg.name ?? '@dxa-deimos/cli',
   NATIVE_PACKAGE_URL: undefined,
 }

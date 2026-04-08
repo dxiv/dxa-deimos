@@ -1,6 +1,6 @@
 # <img width="335" height="89" alt="image" src="https://github.com/user-attachments/assets/833f9e93-c7f6-4a2c-91fd-1285699bcf0b" />
 
-> **[dxa.dev/deimos/](https://dxa.dev/deimos/)** · **[npm `@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)** · **[Source @ dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)**
+> **[dxa.dev/deimos/](https://dxa.dev/deimos/)** · **[npm `@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)** · **[Source @ dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)**
 
 **Deimos** takes its name from Mars’s outer moon—small, fast, and locked in orbit at the edge of the light. From **[DXA](https://dxa.dev)** it is a **terminal-native** coding agent: one `deimos` command, **multi-model routing** across pluggable backends (Anthropic, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), a full **tool** surface, **MCP**, slash commands, **agent orchestration**, and streaming sessions built for depth work. This repository ships the **CLI**, a **VS Code extension**, and a **dark terminal theme** forged for long runs in the shell.
 
@@ -8,7 +8,7 @@
 
 **License & marks:** [MIT](LICENSE). Third-party names and APIs appear only for interoperability and factual description. **[LEGAL.md](LEGAL.md)** sets out attribution, trademarks, and how to report concerns.
 
-**Package:** [**@dxa-dev/deimos**](https://www.npmjs.com/package/@dxa-dev/deimos). **Source & issues:** **[github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)**.
+**Package:** [**@dxa-deimos/cli**](https://www.npmjs.com/package/@dxa-deimos/cli). **Source & issues:** **[github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)**.
 
 **Scope:** CLI, documentation, VS Code extension, and CI are maintained as a single product line.
 
@@ -21,8 +21,8 @@
 [![Discussions](https://img.shields.io/badge/discussions-open-7c3aed)](https://github.com/dxiv/dxa-deimos/discussions)
 [![Security Policy](https://img.shields.io/badge/security-policy-0f766e)](SECURITY.md)
 [![License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
-[![npm](https://img.shields.io/npm/v/@dxa-dev/deimos?label=npm&color=cb3837)](https://www.npmjs.com/package/@dxa-dev/deimos)
-[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-dxa--dev-24292f?logo=github)](https://github.com/orgs/dxa-dev/packages/npm/package/deimos)
+[![npm](https://img.shields.io/npm/v/@dxa-deimos/cli?label=npm&color=cb3837)](https://www.npmjs.com/package/@dxa-deimos/cli)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-dxa--dev-24292f?logo=github)](https://github.com/orgs/dxa-dev/packages/npm/package/cli)
 
 [Quick start](#quick-start) · [Setup](#setup-guides) · [Playbook](#local-agent-playbook-clone-developers) · [Providers](#supported-providers) · [Source build](#source-build-and-local-development) · [Repo layout](#repository-structure) · [VS Code](#vs-code-extension) · [Cheatsheet](docs/CHEATSHEET.md) · [Demo script](docs/DEMO.md) · [Contributing](#contributing) · [Security](#security) · [Privacy](#privacy--local-first) · [Community](#community)
 
@@ -50,14 +50,14 @@ You need **Node.js 22+** (see `engines` in `package.json`) and a terminal. If th
 
 ### Install
 
-**npm:** [@dxa-dev/deimos](https://www.npmjs.com/package/@dxa-dev/deimos)
+**npm:** [@dxa-deimos/cli](https://www.npmjs.com/package/@dxa-deimos/cli)
 
-**GitHub Packages:** [dxa-dev / deimos](https://github.com/orgs/dxa-dev/packages/npm/package/deimos).
+**GitHub Packages (GitHub org `dxa-dev`):** [dxa-dev / cli](https://github.com/orgs/dxa-dev/packages/npm/package/cli).
 
 Use **npm** to install the published CLI. **[GitHub](https://github.com/dxiv/dxa-deimos)** is for source code, issues, and discussions—not a separate “installer” download.
 
 ```bash
-npm install -g @dxa-dev/deimos
+npm install -g @dxa-deimos/cli
 ```
 
 Install **[ripgrep](https://github.com/BurntSushi/ripgrep)** and ensure `rg` is on your `PATH`. If the CLI prints `ripgrep not found`, fix `PATH`, then open a **new** terminal window — [Troubleshooting](docs/troubleshooting.md) has more detail.
@@ -379,7 +379,7 @@ flowchart TB
 
 **Clone vs npm install**
 
-A full **git clone** matches the chart. **`npm install -g @dxa-dev/deimos`** ([npm package](https://www.npmjs.com/package/@dxa-dev/deimos)) only unpacks what `package.json` lists under `"files"` — right now `bin/`, `dist/cli.mjs`, and `README.md`.
+A full **git clone** matches the chart. **`npm install -g @dxa-deimos/cli`** ([npm package](https://www.npmjs.com/package/@dxa-deimos/cli)) only unpacks what `package.json` lists under `"files"` — right now `bin/`, `dist/cli.mjs`, and `README.md`.
 
 ```mermaid
 flowchart LR
@@ -478,8 +478,8 @@ Telemetry-related environment variables include `DISABLE_TELEMETRY` and `DEIMOS_
 | Resource | URL |
 | --- | --- |
 | **Product page (link hub)** | [dxa.dev/deimos/](https://dxa.dev/deimos/) |
-| **This package (npm)** | [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos) |
-| **This package (GitHub Packages)** | [dxa-dev / deimos](https://github.com/orgs/dxa-dev/packages/npm/package/deimos) |
+| **This package (npm)** | [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli) |
+| **This package (GitHub Packages)** | [dxa-dev / cli](https://github.com/orgs/dxa-dev/packages/npm/package/cli) |
 | **This repository** | [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos) |
 | **Discussions** | [GitHub Discussions](https://github.com/dxiv/dxa-deimos/discussions) |
 | **Issues** | [GitHub Issues](https://github.com/dxiv/dxa-deimos/issues) |

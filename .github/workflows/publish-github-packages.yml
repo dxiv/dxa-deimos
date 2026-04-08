@@ -1,4 +1,8 @@
 # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
+#
+# GitHub org is dxa-dev — npm.pkg.github.com requires the package scope to match
+# the org (@dxa-dev). Public npm releases use @dxa-deimos/cli (npm org dxa-deimos).
+# This job will fail while package.json name is @dxa-deimos/* — disable or align names.
 
 name: Publish GitHub Packages
 

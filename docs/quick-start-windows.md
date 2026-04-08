@@ -1,6 +1,6 @@
 # Deimos quick start — Windows
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **npm:** [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)
+**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **npm:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 **Audience:** Anyone on **Windows 10/11** using **PowerShell** (not CMD unless you know how to translate commands).
 
@@ -28,7 +28,7 @@
 ## Install Deimos
 
 ```powershell
-npm install -g @dxa-dev/deimos
+npm install -g @dxa-deimos/cli
 ```
 
 If `deimos` is not found afterward, **close PowerShell completely**, open a new window, and try `deimos` again. If it still fails, see [Troubleshooting](troubleshooting.md).
@@ -140,11 +140,11 @@ Open a **new** PowerShell after this. **Warning:** your API key is stored in Win
 ## Update or remove
 
 ```powershell
-npm install -g @dxa-dev/deimos@latest
+npm install -g @dxa-deimos/cli@latest
 ```
 
 ```powershell
-npm uninstall -g @dxa-dev/deimos
+npm uninstall -g @dxa-deimos/cli
 ```
 
 ---

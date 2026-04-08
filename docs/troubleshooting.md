@@ -1,10 +1,10 @@
 # Troubleshooting — Deimos
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **Package:** [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos) · **Docs index:** [README.md](README.md)
+**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **Package:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli) · **Docs index:** [README.md](README.md)
 
 ## `deimos` command not found after `npm install -g`
 
-Published package: [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos).
+Published package: [**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli).
 
 1. **Close the terminal completely** and open a new one — global npm bins are often picked up only in new sessions.
 2. **Check npm’s global bin directory** is on your `PATH`:
@@ -14,7 +14,7 @@ Published package: [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-de
 4. **Fallback without fixing PATH (temporary):**
 
    ```bash
-   npx --yes @dxa-dev/deimos@latest
+   npx --yes @dxa-deimos/cli@latest
    ```
 
    (Still set your provider env vars in the same shell first.) This is slower than a global install but confirms the package works.
@@ -69,7 +69,7 @@ Run `bun run build` from the repository root, or use `bun run dev` for developme
 
 ## VS Code extension shows “command not found”
 
-Install the CLI globally (`npm install -g @dxa-dev/deimos` — [npm package](https://www.npmjs.com/package/@dxa-dev/deimos)) **or** ensure the `deimos` you built is on the **same PATH** VS Code’s integrated terminal uses. See [extension README](../vscode-extension/deimos-vscode/README.md).
+Install the CLI globally (`npm install -g @dxa-deimos/cli` — [npm package](https://www.npmjs.com/package/@dxa-deimos/cli)) **or** ensure the `deimos` you built is on the **same PATH** VS Code’s integrated terminal uses. See [extension README](../vscode-extension/deimos-vscode/README.md).
 
 ## Still stuck?
 

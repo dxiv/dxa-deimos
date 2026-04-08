@@ -1,6 +1,6 @@
 # Deimos quick start — macOS and Linux
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **npm:** [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)
+**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **npm:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 **Audience:** macOS or Linux users using **bash** or **zsh** in Terminal (or iTerm, etc.).
 
@@ -33,13 +33,13 @@
 ## Install Deimos
 
 ```bash
-npm install -g @dxa-dev/deimos
+npm install -g @dxa-deimos/cli
 ```
 
 If you see `EACCES` / permission errors, either:
 
 - use a Node version manager ([nvm](https://github.com/nvm-sh/nvm), [fnm](https://github.com/Schniz/fnm), etc.), **or**
-- run with `sudo npm install -g @dxa-dev/deimos` (less ideal but common on first setup).
+- run with `sudo npm install -g @dxa-deimos/cli` (less ideal but common on first setup).
 
 If `deimos` is not found, close the terminal, open a new one, and try again. Check `npm bin -g` is on your `PATH` (`echo $PATH`).
 
@@ -151,11 +151,11 @@ Then run `source ~/.zshrc` or open a new tab.
 ## Update or remove
 
 ```bash
-npm install -g @dxa-dev/deimos@latest
+npm install -g @dxa-deimos/cli@latest
 ```
 
 ```bash
-npm uninstall -g @dxa-dev/deimos
+npm uninstall -g @dxa-deimos/cli
 ```
 
 ---

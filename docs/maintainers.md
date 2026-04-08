@@ -1,6 +1,6 @@
 # Deimos — notes for maintainers
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **Package:** [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)
+**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **Package:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 ## CI overview
 
@@ -41,7 +41,7 @@ Development and CI use **Bun** and **`bun.lock`**. **`package-lock.json`** is gi
 1. Bump **`package.json`** version (and extension `package.json` if it should track the CLI).
 2. Update **[CHANGELOG.md](../CHANGELOG.md)** with a dated bullet list for that version.
 3. Commit and push; tag: `git tag v0.x.y && git push origin v0.x.y`.
-4. **Release artifacts:** `.github/workflows/release-artifacts.yml` uploads **`dist/cli.mjs`** for each `v*` tag. **GitHub Packages:** `.github/workflows/publish-github-packages.yml` runs on the same tags; optional repo secret **`GH_PACKAGES_TOKEN`** if the default token cannot publish the **`@dxa-dev`** scope. Registry details: [GitHub npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry). To attach the package to **`dxiv/dxa-deimos`**, **`package.json`** **`repository.url`** must stay **`https://github.com/dxiv/dxa-deimos.git`**; after the next publish, it should list under the repo’s **Packages** (or use the package’s **Settings** on GitHub to **connect repository** once).
+4. **Release artifacts:** `.github/workflows/release-artifacts.yml` uploads **`dist/cli.mjs`** for each `v*` tag. **npm (public):** canonical package is **`@dxa-deimos/cli`** on [npmjs.org](https://www.npmjs.com/) under npm org **`dxa-deimos`**. **GitHub Packages:** the GitHub org is **`dxa-dev`** (not the same as the npm org name). The workflow `.github/workflows/publish-github-packages.yml` uses **`scope: "@dxa-dev"`** so `npm publish` to `npm.pkg.github.com` matches GitHub’s requirement that the package scope equals the org; **`package.json`** is currently **`@dxa-deimos/cli`**, so that job will not succeed until the published name matches **`@dxa-dev/...`** on GitHub or the job is disabled / replaced with an npmjs-only release. Optional secret **`GH_PACKAGES_TOKEN`** if the default token cannot publish. Registry details: [GitHub npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry). To attach a package to **`dxiv/dxa-deimos`**, **`package.json`** **`repository.url`** should stay **`https://github.com/dxiv/dxa-deimos.git`**.
 5. **npmjs.org:** `npm publish` uses **`publishConfig.registry`** in **`package.json`** (public npm). Use your npm credentials.
 
 ## Issue labels

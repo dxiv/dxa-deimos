@@ -4,7 +4,7 @@ This document describes how Deimos handles vulnerability reports and which relea
 
 ## Supported versions
 
-Security fixes target the latest **`main`** branch and the latest [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos) npm release.
+Security fixes target the latest **`main`** branch and the latest [**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli) npm release.
 
 | Version | Supported |
 | ------- | --------- |
@@ -63,7 +63,7 @@ This policy applies to:
 
 - the Deimos source code in this repository
 - official release artifacts published from this repository
-- the [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos) npm package
+- the [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli) npm package
 
 This policy does not cover:
 

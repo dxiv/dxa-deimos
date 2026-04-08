@@ -65,7 +65,7 @@ const result = await Bun.build({
     'MACRO.FEEDBACK_CHANNEL': JSON.stringify(
       'https://github.com/dxiv/dxa-deimos/issues',
     ),
-    'MACRO.PACKAGE_URL': JSON.stringify('@dxa-dev/deimos'),
+    'MACRO.PACKAGE_URL': JSON.stringify('@dxa-deimos/cli'),
     'MACRO.NATIVE_PACKAGE_URL': 'undefined',
   },
   plugins: [

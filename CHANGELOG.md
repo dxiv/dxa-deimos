@@ -1,6 +1,10 @@
 # Changelog
 
-Release notes for **[Deimos](https://github.com/dxiv/dxa-deimos)** follow the **`package.json`** version. **npm:** [@dxa-dev/deimos](https://www.npmjs.com/package/@dxa-dev/deimos). **GitHub Packages:** [dxa-dev/deimos](https://github.com/orgs/dxa-dev/packages/npm/package/deimos).
+Release notes for **[Deimos](https://github.com/dxiv/dxa-deimos)** follow the **`package.json`** version. **npm:** [@dxa-deimos/cli](https://www.npmjs.com/package/@dxa-deimos/cli). **GitHub Packages:** [dxa-dev/cli](https://github.com/orgs/dxa-dev/packages/npm/package/cli) (GitHub org `dxa-dev`).
+
+## 0.2.12
+
+- **npm:** Public package renamed to **`@dxa-deimos/cli`** (npm organization **`dxa-deimos`**). Install: `npm install -g @dxa-deimos/cli`; binary remains **`deimos`**.
 
 ## 0.2.8
 

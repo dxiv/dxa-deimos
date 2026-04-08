@@ -4,7 +4,7 @@
 
 You already ran `deimos` from a terminal and see the **interactive UI**. This page explains what to do next, in plain language.
 
-**Not installed yet?** Install from npm: [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos), or use [Non-technical setup](non-technical-setup.md) or [Windows](quick-start-windows.md) / [macOS / Linux](quick-start-mac-linux.md) first.
+**Not installed yet?** Install from npm: [**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli), or use [Non-technical setup](non-technical-setup.md) or [Windows](quick-start-windows.md) / [macOS / Linux](quick-start-mac-linux.md) first.
 
 ---
 

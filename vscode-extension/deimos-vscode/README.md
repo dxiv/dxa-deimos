@@ -1,6 +1,6 @@
 # Deimos — VS Code extension
 
-**[Deimos](https://dxa.dev/deimos/)** · **[DXA](https://dxa.dev)** · npm [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)
+**[Deimos](https://dxa.dev/deimos/)** · **[DXA](https://dxa.dev)** · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 VS Code companion for the **`deimos`** CLI: a project-aware **Control Center**, deterministic terminal launch, first-class workflows, and the **Deimos Terminal Black** theme—built to keep editor and shell in the same orbit.
 
@@ -30,7 +30,7 @@ VS Code companion for the **`deimos`** CLI: a project-aware **Control Center**, 
 ## Requirements
 
 - VS Code `1.95+`
-- `deimos` available in your terminal PATH — install from npm: [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos) (`npm install -g @dxa-dev/deimos`); [GitHub Packages](https://github.com/orgs/dxa-dev/packages/npm/package/deimos).
+- `deimos` available in your terminal PATH — install from npm: [**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli) (`npm install -g @dxa-deimos/cli`); [GitHub Packages](https://github.com/orgs/dxa-dev/packages/npm/package/cli).
 
 ## Commands
 

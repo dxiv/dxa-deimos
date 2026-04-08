@@ -14,10 +14,10 @@
 
 ### Option A: npm
 
-Package page: [**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos).
+Package page: [**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli).
 
 ```bash
-npm install -g @dxa-dev/deimos
+npm install -g @dxa-deimos/cli
 ```
 
 ### Option B: From source with Bun

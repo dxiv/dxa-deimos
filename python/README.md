@@ -1,6 +1,6 @@
 # Python utilities (optional)
 
-These modules are **not** required to install or run the main **Deimos** CLI ([**`@dxa-dev/deimos`**](https://www.npmjs.com/package/@dxa-dev/deimos): `npm install -g @dxa-dev/deimos`, or a normal `bun` source build).
+These modules are **not** required to install or run the main **Deimos** CLI ([**`@dxa-deimos/cli`**](https://www.npmjs.com/package/@dxa-deimos/cli): `npm install -g @dxa-deimos/cli`, or a normal `bun` source build).
 
 They are **optional helpers** for experimenting with OpenAI-compatible routing (for example Atomic Chat, Ollama) outside the TypeScript entrypoints. Use them if you are building a small sidecar or testing provider behaviour.
 

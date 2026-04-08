@@ -285,4 +285,4 @@ Your setup is in good shape when:
 - `bun run dev:profile` starts the CLI normally.
 - The active model in the UI matches the profile you expect.
 
-For packaged installs (`npm install -g @dxa-dev/deimos`), use the `deimos` command and the guides under [docs/](docs/README.md) instead of `bun run dev:*` unless you are developing this repository.
+For packaged installs (`npm install -g @dxa-deimos/cli`), use the `deimos` command and the guides under [docs/](docs/README.md) instead of `bun run dev:*` unless you are developing this repository.

@@ -54,9 +54,9 @@ Use **`/mcp`** to connect external tools and data sources. Configure servers thr
 ## Updating
 
 - **Installed CLI version:** `deimos --version`
-- **Refresh the global npm package** (same package as in the README): e.g. `npm install -g @dxa-dev/deimos`
+- **Refresh the global npm package** (same package as in the README): e.g. `npm install -g @dxa-deimos/cli`
 - In-session upgrades may also be available via **`/upgrade`** when your build supports it.
 
 ---
 
-**Deimos** · [dxa.dev/deimos/](https://dxa.dev/deimos/) · [Documentation index](README.md) · npm [`@dxa-dev/deimos`](https://www.npmjs.com/package/@dxa-dev/deimos)
+**Deimos** · [dxa.dev/deimos/](https://dxa.dev/deimos/) · [Documentation index](README.md) · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
