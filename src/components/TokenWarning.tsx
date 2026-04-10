@@ -10,6 +10,8 @@ import { getUpgradeMessage } from '../utils/model/contextWindowUpgradeCheck.js';
 type Props = {
   tokenUsage: number;
   model: string;
+  /** Kairos/brief: show only a one-line error when past the error threshold. */
+  briefOnly?: boolean;
 };
 
 /**
@@ -88,10 +90,11 @@ function CollapseLabel(t0) {
   return t5;
 }
 export function TokenWarning(t0) {
-  const $ = _c(13);
+  const $ = _c(16);
   const {
     tokenUsage,
-    model
+    model,
+    briefOnly
   } = t0;
   let t1;
   if ($[0] !== model || $[1] !== tokenUsage) {
@@ -108,6 +111,22 @@ export function TokenWarning(t0) {
     isAboveErrorThreshold
   } = t1;
   const suppressWarning = useCompactWarningSuppression();
+  if (briefOnly) {
+    if (suppressWarning || !isAboveErrorThreshold) {
+      return null;
+    }
+    let tBrief;
+    if ($[13] !== percentLeft || $[14] !== model) {
+      const hint = getUpgradeMessage("warning");
+      tBrief = <Box flexDirection="row"><Text color="error" wrap="truncate">Conversation input critical ({percentLeft}% headroom) · Run /compact{hint ? ` · ${hint}` : ""}</Text></Box>;
+      $[13] = percentLeft;
+      $[14] = model;
+      $[15] = tBrief;
+    } else {
+      tBrief = $[15];
+    }
+    return tBrief;
+  }
   if (!isAboveWarningThreshold || suppressWarning) {
     return null;
   }

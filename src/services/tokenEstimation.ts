@@ -332,10 +332,12 @@ export function roughTokenCountEstimationForMessages(
     /** `Message` uses `unknown` on attachment payloads to avoid import cycles with `attachments.ts`. */
     attachment?: unknown
   }[],
+  /** When set, only sum messages[startIndex..] — avoids allocating a tail slice on hot paths. */
+  startIndex = 0,
 ): number {
   let totalTokens = 0
-  for (const message of messages) {
-    totalTokens += roughTokenCountEstimationForMessage(message)
+  for (let k = startIndex; k < messages.length; k++) {
+    totalTokens += roughTokenCountEstimationForMessage(messages[k]!)
   }
   return totalTokens
 }

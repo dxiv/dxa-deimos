@@ -550,6 +550,21 @@ function findSkillTool(tools: Tools): Tool | undefined {
   return findToolByName(tools, SKILL_TOOL_NAME)
 }
 
+async function countDefinitionTokensForSkillSlashTool(
+  tool: Tool | undefined,
+  getToolPermissionContext: () => Promise<ToolPermissionContext>,
+  agentInfo: AgentDefinitionsResult | null,
+): Promise<number> {
+  if (!tool) {
+    return 0
+  }
+  return countToolDefinitionTokens(
+    [tool],
+    getToolPermissionContext,
+    agentInfo,
+  )
+}
+
 async function countSlashCommandTokens(
   tools: Tools,
   getToolPermissionContext: () => Promise<ToolPermissionContext>,
@@ -568,8 +583,8 @@ async function countSlashCommandTokens(
     }
   }
 
-  const slashCommandTokens = await countToolDefinitionTokens(
-    [slashCommandTool],
+  const slashCommandTokens = await countDefinitionTokensForSkillSlashTool(
+    slashCommandTool,
     getToolPermissionContext,
     agentInfo,
   )
@@ -610,8 +625,8 @@ async function countSkillTokens(
     // This is the same tool counted by countSlashCommandTokens(), but we track it separately
     // here for display purposes. These tokens should NOT be added to context categories
     // to avoid double-counting.
-    const skillTokens = await countToolDefinitionTokens(
-      [slashCommandTool],
+    const skillTokens = await countDefinitionTokensForSkillSlashTool(
+      slashCommandTool,
       getToolPermissionContext,
       agentInfo,
     )
