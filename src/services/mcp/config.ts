@@ -1401,28 +1401,65 @@ function rememberParsedMcpFile(
   parseMcpConfigFileCache.set(key, { mtimeMs, result })
 }
 
-/**
- * Parse and validate an MCP configuration from a file path
- * @param params Parsing parameters
- * @returns Validated configuration with any errors
- */
-export function parseMcpConfigFromFilePath(params: {
+function parseMcpConfigFileContentsAndCache(params: {
   filePath: string
   expandVars: boolean
   scope: ConfigScope
+  mtimeMs: number
+  configContent: string
 }): {
   config: McpJsonConfig | null
   errors: ValidationError[]
 } {
-  const { filePath, expandVars, scope } = params
-  const fs = getFsImplementation()
+  const { filePath, expandVars, scope, mtimeMs, configContent } = params
+  const cacheKey = `${filePath}\0${expandVars}\0${scope}`
 
-  let mtimeMs: number
+  const parsedJson = safeParseJSON(configContent)
+
+  if (!parsedJson) {
+    logForDebugging(
+      `MCP config is not valid JSON: ${filePath} (scope=${scope}, length=${configContent.length}, first100=${jsonStringify(configContent.slice(0, 100))})`,
+      { level: 'error' },
+    )
+    return {
+      config: null,
+      errors: [
+        {
+          file: filePath,
+          path: '',
+          message: `MCP config is not a valid JSON`,
+          suggestion: 'Fix the JSON syntax errors in the file',
+          mcpErrorMetadata: {
+            scope,
+            severity: 'fatal',
+          },
+        },
+      ],
+    }
+  }
+
+  const result = parseMcpConfig({
+    configObject: parsedJson,
+    expandVars,
+    scope,
+    filePath,
+  })
+  rememberParsedMcpFile(cacheKey, mtimeMs, result)
+  return result
+}
+
+function statMcpConfigFile(
+  filePath: string,
+  scope: ConfigScope,
+):
+  | { ok: true; mtimeMs: number }
+  | { ok: false; errors: ValidationError[] } {
+  const fs = getFsImplementation()
   try {
     const st = fs.statSync(filePath)
     if (!st.isFile()) {
       return {
-        config: null,
+        ok: false,
         errors: [
           {
             file: filePath,
@@ -1437,12 +1474,12 @@ export function parseMcpConfigFromFilePath(params: {
         ],
       }
     }
-    mtimeMs = Math.floor(st.mtimeMs)
+    return { ok: true, mtimeMs: Math.floor(st.mtimeMs) }
   } catch (error: unknown) {
     const code = getErrnoCode(error)
     if (code === 'ENOENT') {
       return {
-        config: null,
+        ok: false,
         errors: [
           {
             file: filePath,
@@ -1462,7 +1499,7 @@ export function parseMcpConfigFromFilePath(params: {
       { level: 'error' },
     )
     return {
-      config: null,
+      ok: false,
       errors: [
         {
           file: filePath,
@@ -1477,6 +1514,98 @@ export function parseMcpConfigFromFilePath(params: {
       ],
     }
   }
+}
+
+async function statMcpConfigFileAsync(
+  filePath: string,
+  scope: ConfigScope,
+): Promise<
+  | { ok: true; mtimeMs: number }
+  | { ok: false; errors: ValidationError[] }
+> {
+  const fs = getFsImplementation()
+  try {
+    const st = await fs.stat(filePath)
+    if (!st.isFile()) {
+      return {
+        ok: false,
+        errors: [
+          {
+            file: filePath,
+            path: '',
+            message: `MCP config path is not a regular file: ${filePath}`,
+            suggestion: 'Use a path to a .mcp.json file',
+            mcpErrorMetadata: {
+              scope,
+              severity: 'fatal',
+            },
+          },
+        ],
+      }
+    }
+    return { ok: true, mtimeMs: Math.floor(st.mtimeMs) }
+  } catch (error: unknown) {
+    const code = getErrnoCode(error)
+    if (code === 'ENOENT') {
+      return {
+        ok: false,
+        errors: [
+          {
+            file: filePath,
+            path: '',
+            message: `MCP config file not found: ${filePath}`,
+            suggestion: 'Check that the file path is correct',
+            mcpErrorMetadata: {
+              scope,
+              severity: 'fatal',
+            },
+          },
+        ],
+      }
+    }
+    logForDebugging(
+      `MCP config stat error for ${filePath} (scope=${scope}): ${error}`,
+      { level: 'error' },
+    )
+    return {
+      ok: false,
+      errors: [
+        {
+          file: filePath,
+          path: '',
+          message: `Failed to access file: ${error}`,
+          suggestion: 'Check file permissions and ensure the path is valid',
+          mcpErrorMetadata: {
+            scope,
+            severity: 'fatal',
+          },
+        },
+      ],
+    }
+  }
+}
+
+/**
+ * Parse and validate an MCP configuration from a file path
+ * @param params Parsing parameters
+ * @returns Validated configuration with any errors
+ */
+export function parseMcpConfigFromFilePath(params: {
+  filePath: string
+  expandVars: boolean
+  scope: ConfigScope
+}): {
+  config: McpJsonConfig | null
+  errors: ValidationError[]
+} {
+  const { filePath, expandVars, scope } = params
+  const fs = getFsImplementation()
+
+  const st = statMcpConfigFile(filePath, scope)
+  if (!st.ok) {
+    return { config: null, errors: st.errors }
+  }
+  const { mtimeMs } = st
 
   const cacheKey = `${filePath}\0${expandVars}\0${scope}`
   const cached = parseMcpConfigFileCache.get(cacheKey)
@@ -1527,11 +1656,66 @@ export function parseMcpConfigFromFilePath(params: {
     }
   }
 
-  const parsedJson = safeParseJSON(configContent)
+  return parseMcpConfigFileContentsAndCache({
+    filePath,
+    expandVars,
+    scope,
+    mtimeMs,
+    configContent,
+  })
+}
 
-  if (!parsedJson) {
+/**
+ * Async variant of {@link parseMcpConfigFromFilePath} for startup paths that
+ * should avoid blocking the event loop on stat/read.
+ */
+export async function parseMcpConfigFromFilePathAsync(params: {
+  filePath: string
+  expandVars: boolean
+  scope: ConfigScope
+}): Promise<{
+  config: McpJsonConfig | null
+  errors: ValidationError[]
+}> {
+  const { filePath, expandVars, scope } = params
+  const fs = getFsImplementation()
+
+  const st = await statMcpConfigFileAsync(filePath, scope)
+  if (!st.ok) {
+    return { config: null, errors: st.errors }
+  }
+  const { mtimeMs } = st
+
+  const cacheKey = `${filePath}\0${expandVars}\0${scope}`
+  const cached = parseMcpConfigFileCache.get(cacheKey)
+  if (cached && cached.mtimeMs === mtimeMs) {
+    return cached.result
+  }
+
+  let configContent: string
+  try {
+    configContent = await fs.readFile(filePath, { encoding: 'utf8' })
+  } catch (error: unknown) {
+    const code = getErrnoCode(error)
+    if (code === 'ENOENT') {
+      return {
+        config: null,
+        errors: [
+          {
+            file: filePath,
+            path: '',
+            message: `MCP config file not found: ${filePath}`,
+            suggestion: 'Check that the file path is correct',
+            mcpErrorMetadata: {
+              scope,
+              severity: 'fatal',
+            },
+          },
+        ],
+      }
+    }
     logForDebugging(
-      `MCP config is not valid JSON: ${filePath} (scope=${scope}, length=${configContent.length}, first100=${jsonStringify(configContent.slice(0, 100))})`,
+      `MCP config read error for ${filePath} (scope=${scope}): ${error}`,
       { level: 'error' },
     )
     return {
@@ -1540,8 +1724,8 @@ export function parseMcpConfigFromFilePath(params: {
         {
           file: filePath,
           path: '',
-          message: `MCP config is not a valid JSON`,
-          suggestion: 'Fix the JSON syntax errors in the file',
+          message: `Failed to read file: ${error}`,
+          suggestion: 'Check file permissions and ensure the file exists',
           mcpErrorMetadata: {
             scope,
             severity: 'fatal',
@@ -1551,14 +1735,13 @@ export function parseMcpConfigFromFilePath(params: {
     }
   }
 
-  const result = parseMcpConfig({
-    configObject: parsedJson,
+  return parseMcpConfigFileContentsAndCache({
+    filePath,
     expandVars,
     scope,
-    filePath,
+    mtimeMs,
+    configContent,
   })
-  rememberParsedMcpFile(cacheKey, mtimeMs, result)
-  return result
 }
 
 export const doesEnterpriseMcpConfigExist = memoize((): boolean => {

@@ -1,4 +1,5 @@
 import type { Anthropic } from '@anthropic-ai/sdk'
+import type { ToolResultBlockParam } from '@anthropic-ai/sdk/resources/index.mjs'
 import type { BetaMessageParam as MessageParam } from '@anthropic-ai/sdk/resources/beta/messages/messages.mjs'
 // @aws-sdk/client-bedrock-runtime is imported dynamically in countTokensWithBedrock()
 // to defer ~279KB of AWS SDK code until a Bedrock call is actually made
@@ -399,7 +400,34 @@ function roughTokenCountEstimationForContent(
   return totalTokens
 }
 
-function roughTokenCountEstimationForBlock(
+/** Same image/document cap as microCompact tool_result handling (avoid base64 blow-up). */
+const TOOL_RESULT_MEDIA_TOKEN_ESTIMATE = 2000
+
+/**
+ * Tool_result sizing used by microcompact `tokensSaved` and session estimates.
+ * Counts only text / image / document parts (matches legacy microCompact behavior).
+ */
+export function roughTokenEstimateForToolResultBlock(
+  block: ToolResultBlockParam,
+): number {
+  if (!block.content) {
+    return 0
+  }
+  if (typeof block.content === 'string') {
+    return roughTokenCountEstimation(block.content)
+  }
+  return block.content.reduce((sum, item) => {
+    if (item.type === 'text') {
+      return sum + roughTokenCountEstimation(item.text)
+    }
+    if (item.type === 'image' || item.type === 'document') {
+      return sum + TOOL_RESULT_MEDIA_TOKEN_ESTIMATE
+    }
+    return sum
+  }, 0)
+}
+
+export function roughTokenCountEstimationForBlock(
   block: string | Anthropic.ContentBlock | Anthropic.ContentBlockParam,
 ): number {
   if (typeof block === 'string') {
@@ -418,7 +446,7 @@ function roughTokenCountEstimationForBlock(
     // document: base64 PDF in source.data.  Must NOT reach the
     // jsonStringify catch-all — a 1MB PDF is ~1.33M base64 chars →
     // ~325k estimated tokens, vs the ~2000 the API actually charges.
-    // Same constant as microCompact's calculateToolResultTokens.
+    // Same constant as roughTokenEstimateForToolResultBlock.
     return 2000
   }
   if (block.type === 'tool_result') {

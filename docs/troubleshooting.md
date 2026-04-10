@@ -79,6 +79,8 @@ If you are developing from a clone, see **[PLAYBOOK.md](../PLAYBOOK.md)** for Ol
 
 - **`deimos --debug`** (or **`-d`**) turns on Deimos’s own verbose logging (and related flags like **`--debug-file`** where supported). This is usually what you want when an error message says to “run with `--debug`”.
 - **`DEIMOS_DEBUG=1`** in the environment is used in a few places (for example Node internal warnings and some diagnostics). It is **not** a full substitute for **`--debug`** everywhere.
+- **`DEIMOS_DEBUG_LOG_LEVEL`** (when debug logging is active) sets the minimum severity written to the debug log file: **`verbose`**, **`debug`**, **`info`**, **`warn`**, or **`error`** (case-insensitive). Default is **`debug`**, which filters out the noisiest **`verbose`** lines (for example full status-line payloads). Use **`verbose`** only when you need that volume.
+- **`DEIMOS_DEBUG_LOGS_DIR`** overrides the default debug log **file** path when **`--debug-file`** is not set. Despite the name, it is read as a **full path to a log file** (see **`getDebugLogPath()`** in `src/utils/debug.ts`), not a directory that Deimos appends a session id to. **`--debug-file`** wins when present.
 - For a full list of tunables and comments, see **[`.env.example`](../.env.example)** in the repo and **[advanced setup — long sessions & limits](advanced-setup.md#long-sessions-context-and-token-limits)**.
 
 ## Diagnostics: `/doctor`, `deimos doctor`, and scripts

@@ -187,7 +187,7 @@ import { registerMcpDoctorCommand } from 'src/commands/mcp/doctorCommand.js';
 import { registerMcpXaaIdpCommand } from 'src/commands/mcp/xaaIdpCommand.js';
 import { fetchDeimosCloudMcpConfigsIfEligible } from 'src/services/mcp/anthropicCloudMcp.js';
 import { clearServerCache } from 'src/services/mcp/client.js';
-import { areMcpConfigsAllowedWithEnterpriseMcpConfig, dedupDeimosCloudMcpServers, doesEnterpriseMcpConfigExist, filterMcpServersByPolicy, getDeimosMcpConfigs, getMcpServerSignature, parseMcpConfig, parseMcpConfigFromFilePath } from 'src/services/mcp/config.js';
+import { areMcpConfigsAllowedWithEnterpriseMcpConfig, dedupDeimosCloudMcpServers, doesEnterpriseMcpConfigExist, filterMcpServersByPolicy, getDeimosMcpConfigs, getMcpServerSignature, parseMcpConfig, parseMcpConfigFromFilePathAsync } from 'src/services/mcp/config.js';
 import { excludeCommandsByServer, excludeResourcesByServer } from 'src/services/mcp/utils.js';
 import { isXaaEnabled } from 'src/services/mcp/xaaIdpLogin.js';
 import { getRelevantTips } from 'src/services/tips/tipRegistry.js';
@@ -1481,7 +1481,7 @@ async function run(): Promise<CommanderCommand> {
         } else {
           // Try as file path
           const configPath = resolve(configItem);
-          const result = parseMcpConfigFromFilePath({
+          const result = await parseMcpConfigFromFilePathAsync({
             filePath: configPath,
             expandVars: true,
             scope: 'dynamic'

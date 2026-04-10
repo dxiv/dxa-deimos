@@ -61,6 +61,7 @@ import {
 } from './messages.js'
 import { getRuntimeMainLoopModel } from './model/model.js'
 import type { SettingSource } from './settings/constants.js'
+import pMap from 'p-map'
 import { jsonStringify } from './slowOperations.js'
 import { buildEffectiveSystemPrompt } from './systemPrompt.js'
 import type { Theme } from './theme.js'
@@ -691,8 +692,9 @@ export async function countMcpToolTokens(
   // Include name + description + input schema to match what toolToAPISchema
   // sends — otherwise tools with similar schemas but different descriptions
   // get identical counts (MCP tools share the same base Zod inputSchema).
-  const estimates = await Promise.all(
-    mcpTools.map(async t =>
+  const estimates = await pMap(
+    mcpTools,
+    async t =>
       roughTokenCountEstimation(
         jsonStringify({
           name: t.name,
@@ -704,7 +706,7 @@ export async function countMcpToolTokens(
           input_schema: t.inputJSONSchema ?? {},
         }),
       ),
-    ),
+    { concurrency: 4 },
   )
   const estimateTotal = estimates.reduce((s, e) => s + e, 0) || 1
   const mcpToolTokensByTool = estimates.map(e =>
