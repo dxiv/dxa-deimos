@@ -485,7 +485,7 @@ export async function* runToolUse(
     logError(error)
     const errorMessage = error instanceof Error ? error.message : String(error)
     const toolInfo = tool ? ` (${tool.name})` : ''
-    const detailedError = `Error calling tool${toolInfo}: ${errorMessage}`
+    const detailedError = `Error calling tool${toolInfo}: ${errorMessage} · If this persists, run /doctor or deimos doctor`
 
     yield {
       message: createUserMessage({

@@ -3,6 +3,7 @@ import {
   logEvent,
   type AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS,
 } from 'src/services/analytics/index.js'
+import { describeThrowableForUser } from '../services/api/errorUtils.js'
 import {
   toolMatchesName,
   type Tools,
@@ -1056,6 +1057,11 @@ async function maybe<A>(label: string, f: () => Promise<A[]>): Promise<A[]> {
     logError(e)
     // For Ant users, log the full error to help with debugging
     logAntError(`Attachment error in ${label}`, e)
+
+    const detail = describeThrowableForUser(e, 220)
+    process.stderr.write(
+      `\nDeimos: could not prepare "${label}" context (${detail}). Continuing without it.\n`,
+    )
 
     return []
   }
