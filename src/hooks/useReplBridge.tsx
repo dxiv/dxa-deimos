@@ -502,7 +502,9 @@ export function useReplBridge(messages: Message[], setMessages: (action: React.S
             clearTimeout(failureTimeoutRef.current);
             setAppState(prev_13 => ({
               ...prev_13,
-              replBridgeError: prev_13.replBridgeError ?? 'check debug logs for details'
+              replBridgeError:
+                prev_13.replBridgeError ??
+                'Bridge could not start. Check login/session, network, and /config (you can disable the bridge there).',
             }));
             failureTimeoutRef.current = setTimeout(() => {
               if (cancelled) return;

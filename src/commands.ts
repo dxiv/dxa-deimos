@@ -158,6 +158,8 @@ import advisor from './commands/advisor.js'
 import { logError } from './utils/log.js'
 import { toError } from './utils/errors.js'
 import { logForDebugging } from './utils/debug.js'
+import { enqueuePendingNotification } from './utils/messageQueueManager.js'
+import { wrapInSystemReminder } from './utils/messages.js'
 import {
   getSkillDirCommands,
   clearSkillCaches,
@@ -611,6 +613,13 @@ export const getSlashCommandToolSkills = memoize(
       // Return empty array rather than throwing - skills are non-critical
       // This prevents skill loading failures from breaking the entire system
       logForDebugging('Returning empty skills array due to load failure')
+      enqueuePendingNotification({
+        value: wrapInSystemReminder(
+          'Skill catalog failed to load — plugin and user skills may be unavailable this session. Try /doctor, /reload-plugins, or check debug logs.',
+        ),
+        mode: 'task-notification',
+        priority: 'next',
+      })
       return []
     }
   },
