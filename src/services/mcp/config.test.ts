@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, rmSync, utimesSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
@@ -21,6 +21,12 @@ const validMcpJson = JSON.stringify({
     echo: { command: 'echo', args: ['hi'] },
   },
 })
+
+/** Stabilize mtime for parse cache tests (Linux CI can otherwise see sub-ms mtime drift). */
+function touchFixedMtime(filePath: string, variant = 0): void {
+  const t = new Date(Date.UTC(2024, 5, 1 + variant, 12, 0, 0))
+  utimesSync(filePath, t, t)
+}
 
 function makeTrackingFs(): {
   fs: FsOperations
@@ -135,6 +141,7 @@ test('MCP file parse cache: second async read skips readFile', async () => {
   try {
     const filePath = join(dir, 'mcp.json')
     writeFileSync(filePath, validMcpJson, 'utf8')
+    touchFixedMtime(filePath)
 
     await parseMcpConfigFromFilePathAsync({
       filePath,
@@ -151,6 +158,7 @@ test('MCP file parse cache: second async read skips readFile', async () => {
     assert.equal(counters.readFileAsyncCalls, 1)
 
     writeFileSync(filePath, validMcpJson + '\n', 'utf8')
+    touchFixedMtime(filePath, 1)
     await parseMcpConfigFromFilePathAsync({
       filePath,
       expandVars: true,
@@ -170,6 +178,7 @@ test('MCP file parse cache: sync hits cache after async parse', async () => {
   try {
     const filePath = join(dir, 'mcp.json')
     writeFileSync(filePath, validMcpJson, 'utf8')
+    touchFixedMtime(filePath)
 
     await parseMcpConfigFromFilePathAsync({
       filePath,

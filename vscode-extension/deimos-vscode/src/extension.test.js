@@ -1,6 +1,5 @@
-const test = require('node:test');
+const { test, mock } = require('bun:test');
 const assert = require('node:assert/strict');
-const { mock } = require('bun:test');
 
 function createStatus(overrides = {}) {
   return {
