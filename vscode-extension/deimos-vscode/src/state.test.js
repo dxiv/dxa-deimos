@@ -1,4 +1,4 @@
-const test = require('node:test');
+const { test } = require('bun:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -85,36 +85,36 @@ test('resolveCommandCheckPath leaves bare commands alone', () => {
   assert.equal(resolveCommandCheckPath('deimos', '/repo'), null);
 });
 
-test('findCommandPath treats shell-like input as a literal executable name', t => {
+test('findCommandPath treats shell-like input as a literal executable name', () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'deimos-command-'));
-  t.after(() => {
+  try {
+    const commandName = process.platform === 'win32'
+      ? 'deimos & whoami'
+      : 'deimos && whoami';
+    const executableName = process.platform === 'win32'
+      ? `${commandName}.cmd`
+      : commandName;
+    const executablePath = path.join(tempDir, executableName);
+
+    fs.writeFileSync(executablePath, process.platform === 'win32' ? '@echo off\r\n' : '#!/bin/sh\n');
+    if (process.platform !== 'win32') {
+      fs.chmodSync(executablePath, 0o755);
+    }
+
+    const resolvedPath = findCommandPath(commandName, {
+      cwd: null,
+      env: {
+        PATH: tempDir,
+        PATHEXT: '.CMD;.EXE',
+      },
+      platform: process.platform,
+    });
+
+    assert.ok(resolvedPath);
+    assert.equal(resolvedPath.toLowerCase(), executablePath.toLowerCase());
+  } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
-  });
-
-  const commandName = process.platform === 'win32'
-    ? 'deimos & whoami'
-    : 'deimos && whoami';
-  const executableName = process.platform === 'win32'
-    ? `${commandName}.cmd`
-    : commandName;
-  const executablePath = path.join(tempDir, executableName);
-
-  fs.writeFileSync(executablePath, process.platform === 'win32' ? '@echo off\r\n' : '#!/bin/sh\n');
-  if (process.platform !== 'win32') {
-    fs.chmodSync(executablePath, 0o755);
   }
-
-  const resolvedPath = findCommandPath(commandName, {
-    cwd: null,
-    env: {
-      PATH: tempDir,
-      PATHEXT: '.CMD;.EXE',
-    },
-    platform: process.platform,
-  });
-
-  assert.ok(resolvedPath);
-  assert.equal(resolvedPath.toLowerCase(), executablePath.toLowerCase());
 });
 
 test('describeProviderState uses saved profile when present', () => {

@@ -1,4 +1,4 @@
-const test = require('node:test');
+const { test } = require('bun:test');
 const assert = require('node:assert/strict');
 
 function loadPresentation() {
